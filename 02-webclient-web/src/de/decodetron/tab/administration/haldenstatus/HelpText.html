@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+        <p>
+            <h3>
+                <u>Vorgehensweise:</u>
+            </h3>
+            <p>Von der Webseite den aktuellen Haldenstatus für Belege und/oder Datensätze über "Download"
+                herunterladen.Dabei bitte den Dateinamen nicht verändern!</p>
+            <p>
+                Diese Dateien sind im CSV-Format angelegt und können problemlos mit Excel bearbeitet werden. Sie
+                enthalten die im Online-Archiv sichtbaren Informationen, zusätzlich aber noch ein Feld mit der
+                Bezeichnung <b>"Action"</b>
+            </p>
+            <p>
+                Wird in dieses Feld das Steuerwort <b>"delete"</b> geschrieben, so löst dies die Löschung des Beleges
+                resp. der Datei oder des Datensatzes aus (je nach Steuerdatei). Datenzeilen ohne gültiges
+                Action-Steuerwort bewirken nichts, müssen daher auch nicht gelöscht werden.
+            </p>
+            <p>Abschließend die Steuerdatei wieder im gleichen Format und mit dem vorgegebenen Dateinamen speichern,
+                in einem Datenpaket verpacken und an Decodetron übertragen. Sobald der Import erfolgt, werden die
+                gewünschten Aktionen ausgeführt.</p>
+    </wicket:panel>
+</body>
+</html>

@@ -1,0 +1,556 @@
+/* ANSICHT ADMINISTRATION => SCAN-HALDE START */
+.view.halde iframe {
+  display: block;
+  position: relative;
+  margin: 10px 0 0 5px;
+  width: 630px;
+  height: 235px;
+  background: #F6F6F4;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+.view.luecke iframe {
+  display: block;
+  position: relative;
+  margin: 10px 0 0 5px;
+  width: 97%;
+  height: 90%;
+  background: #F6F6F4;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+.view.halde .callout {
+  position: absolute;
+  top: 45px;
+  left: 670px;
+  width: 200px;
+  margin: 0px 0px;
+  padding: 18px 25px;
+  background-color: #eef4f9;
+  background: -moz-linear-gradient(top, #eef4f9 10%, #999999);
+  background: -webkit-linear-gradient(top, #eef4f9 10%, #999999);
+  background: -o-linear-gradient(top, #eef4f9 10%, #999999);
+  border-radius: 0.0em 0.2em 0.2em 0.2em;
+}
+.view.halde .callout .notchleft {
+  position: absolute;
+  top: -12px;
+  left: -15px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent #eef4f9 transparent transparent;
+}
+.view.halde .callout .closehaldehelp {
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 21px;
+  right: -12px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -moz-box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  box-shadow: 1px 1px 3px #000;
+}
+.view.halde .border-callout {
+  border: 1px solid #898C8E;
+  padding: 17px 15px;
+}
+.view.halde .border-callout .border-notch-left {
+  border-right: 17px solid #898C8E;
+  left: -17px;
+  top: -13px;
+}
+.view.halde .download, .tab-panel .view.luecke .download {
+  display: inline-block;
+  color: #3f3f3f;
+  font-weight: bold;
+  line-height: 25px;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  margin-top: 7px;
+  margin-left: 5px;
+  background: #d6d6d6;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+  text-decoration: none;
+  cursor: pointer;
+}
+.view.halde a.refresh img, .tab-panel .view.luecke a.refresh img {
+  position: relative;
+  top: 8px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  border: 0px solid white;
+}
+.view.halde .info, .tab-panel .view.luecke .info {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin: 0 0 0 15px;
+  border: 0px solid white;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 16px;
+  color: #ffffff;
+}
+/* ANSICHT ADMINISTRATION => SCAN-HALDE ENDE */
+/* ANSICHT ADMINISTRATION => HALDE BEARBEITEN START */
+.alignright {
+  text-align: right;
+}
+.alignleft {
+  text-align: left;
+}
+/* EINGABEFELDER ANFANG */
+form.offeneScan fieldset div label.label1 {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  margin-left: 22px;
+  display: inline-block;
+  width: 123px;
+  text-indent: -5px;
+}
+form.offeneScan fieldset .styled-select select {
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  width: 170px;
+  background: #E9E9E7;
+  padding: 7px 0px;
+  text-indent: 9px;
+  cursor: pointer;
+}
+form.offeneScan fieldset div.styled-select select {
+  padding: 7px 5px;
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  height: 31px;
+  background: url("../image/arr_down.png") no-repeat right #e9e9e7;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+form.offeneScan fieldset div.styled-select select:disabled {
+  color: #A4A4A4;
+}
+form.offeneScan fieldset div.styled-select select::-ms-expand {
+  display: none;
+}
+form.offeneScan fieldset div.styled-select select option:hover {
+  background: #e9e9e7;
+}
+/* EINGABEFELDER ENDE */
+/* TABELLE OFFENE SCANDATEIEN ANFANG */
+form.offeneScan fieldset {
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+  border-left: 1px solid #e9e9e7;
+  border-right: 1px solid #e9e9e7;
+  border-bottom: 1px solid #e9e9e7;
+}
+form.offeneScan fieldset .foundinfo {
+  width: 320px;
+  padding: 5px 0px 5px 1px;
+  background: #9FA7B4;
+}
+form.offeneScan fieldset .headline2.halde {
+  margin-top: 10px;
+  height: 42px;
+  margin: 0px 0px 1px 0px;
+  width: 320px;
+  background: #9FA7B4;
+  font-size: 17px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+}
+form.offeneScan fieldset .headline2.halde img {
+  position: relative;
+  top: 7px;
+  left: 100px;
+}
+form.offeneScan fieldset input.searchbtn {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+  border: 0px;
+  width: 320px;
+  height: 34px;
+  margin: 0px 0px 1px 0px;
+  background: #E41F29;
+}
+form.offeneScan fieldset .tblwrapphalde {
+  /* Hält die Tabelle in Form bei zu breiten Zellen !*/
+
+  width: 320px;
+  /*hält die Fehlermeldung auf Position*/
+
+  position: relative;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll {
+  background: #E8E8E8;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table {
+  line-height: 18px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 300px;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table thead {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: #9D9D9D;
+  white-space: nowrap;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr.dk {
+  background: #FFFFFF;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr.ex {
+  /* background: #F2F5A9;  gelb */
+
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr.sv {
+  /* background: #BCF5A9;  grün */
+
+  background: #F6CECE;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr.ex.sv {
+  /* background: #F6CECE;  rot */
+
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table th, form.offeneScan fieldset .tblwrapphalde .tblscroll table td {
+  border: 1px solid white;
+  padding: 0 1px;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table td.filename {
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table td.alignright, form.offeneScan fieldset .tblwrapphalde .tblscroll table th.alignright {
+  padding: 0 10px 0 0;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table td.alignleft, form.offeneScan fieldset .tblwrapphalde .tblscroll table th.alignleft {
+  padding: 0 0 0 10px;
+}
+form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr:hover th, form.offeneScan fieldset .tblwrapphalde .tblscroll table tbody tr:hover td {
+  background: #9FA7B4;
+  cursor: pointer;
+}
+/* TABELLE OFFENE SCANDATEIEN ENDE */
+/* TABELLE OFFENE SCANDATEIEN PAGINIERUNG START */
+form.offeneScan fieldset ul.pagination {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  border-radius: 3px;
+  display: inline-block;
+}
+form.offeneScan fieldset .pagination > li {
+  display: inline;
+}
+form.offeneScan fieldset .pagination > li > a, form.offeneScan fieldset .pagination > li > span {
+  position: relative;
+  float: left;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #000000;
+  background-color: #e9e9e7;
+  border: 1px solid white;
+  margin-left: -1px;
+  padding: 2px 5px;
+}
+form.offeneScan fieldset .pagination > li:first-child > a, form.offeneScan fieldset .pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+form.offeneScan fieldset .pagination > li:last-child > a, form.offeneScan fieldset .pagination > li:last-child > span {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+form.offeneScan fieldset .pagination > li > a:hover,
+form.offeneScan fieldset .pagination > li > span:hover,
+form.offeneScan fieldset .pagination > li > a:focus,
+form.offeneScan fieldset .pagination > li > span:focus {
+  color: #ffffff;
+  background-color: #80b6ed;
+  border-color: transparent;
+}
+form.offeneScan fieldset .pagination > .active > a,
+form.offeneScan fieldset .pagination > .active > span,
+form.offeneScan fieldset .pagination > .active > a:hover,
+form.offeneScan fieldset .pagination > .active > span:hover {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #80b6ed;
+  border-color: transparent;
+  cursor: default;
+}
+/* TABELLE OFFENE SCANDATEIEN PAGINIERUNG ENDE*/
+.wrappview {
+  top: 167px;
+  left: 333px;
+  right: 15px;
+  height: 650px;
+  position: absolute;
+  background-color: #3f3f3f;
+}
+.wrappview .viewpdf {
+  text-align: center;
+  vertical-align: center;
+  margin-left: 0em;
+  padding: 345px 0em;
+  background: #3f3f3f;
+  font-size: 17px;
+  color: #ffffff;
+}
+.wrappview iframe {
+  width: 100%;
+  height: 650px;
+  border: 0px;
+  overflow: hidden;
+  position: relative;
+}
+.wrappview form.bearbeiten {
+  /* -----------  */
+
+  margin: 0px 0px 0 0px;
+  width: 100%;
+  /*height: 195px;*/
+
+  /* -----------  */
+
+  padding: 0px;
+  border: 0px solid black;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+  border-left: 0px solid #e9e9e7;
+  border-right: 0px solid #e9e9e7;
+  border-bottom: 0px solid #e9e9e7;
+}
+.wrappview form.bearbeiten .feedbackPanel {
+  position: absolute;
+  left: -322px;
+  top: 520px;
+  padding: 5px;
+  width: 308px;
+  overflow: auto;
+  /*border: 1px solid #BAD5DE;*/
+
+  background-color: #E8E8E8;
+  white-space: nowrap;
+  color: #26B100;
+  font-family: Arial;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: bold;
+  border-radius: 0.2em;
+}
+.wrappview form.bearbeiten .feedbackPanelERROR {
+  color: #df666c;
+  list-style-type: disc;
+  margin-left: 10px;
+}
+.wrappview form.bearbeiten .feedbackPanel ul {
+  padding: 0;
+  list-style-type: disc;
+}
+.wrappview form.bearbeiten fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.wrappview form.bearbeiten fieldset .headline1 {
+  height: 42px;
+  margin-bottom: 1px;
+  width: 100%;
+  text-align: center;
+  background: #9FA7B4;
+  font-size: 17px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+}
+.wrappview form.bearbeiten fieldset .headline1 div {
+  display: inline;
+  line-height: 42px;
+}
+.wrappview form.bearbeiten fieldset input.speichernbtn, .wrappview form.bearbeiten fieldset input.abbrechenbtn {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+  border: 1px solid white;
+  height: 30px;
+  margin: 0px 0px 1px 0px;
+  width: 92px;
+  background: #E41F29;
+}
+.wrappview form.bearbeiten fieldset input.speichernbtn:hover, .wrappview form.bearbeiten fieldset input.abbrechenbtn:hover {
+  background: #BA171F;
+  cursor: pointer;
+}
+.wrappview form.bearbeiten fieldset div.headline1 img {
+  position: relative;
+  left: 29 0px;
+  top: 7px;
+}
+.wrappview form.bearbeiten fieldset div.headline1 img:hover {
+  cursor: pointer;
+}
+/* TABELLE ARCHIVIERUNGSDATENSATZ ERSTELLEN ANFANG */
+.wrappview form.bearbeiten fieldset .tblhbea {
+  background-color: #3f3f3f;
+  margin-left: 1px;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table {
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody td img.busadelete {
+  position: relative;
+  top: 5px;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody td {
+  border: 1px solid #D9D9D7;
+  background: white;
+  height: 35px;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody td:last-child {
+  background: white;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody input:disabled {
+  background: #F5F6F1;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody input {
+  border: 0;
+  margin: 0;
+  padding: 0px;
+  height: 35px;
+  background: white;
+  width: 170px;
+  padding-left: 5px;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody .search {
+  background: url("../image/search.png") no-repeat left;
+  width: 150px;
+  padding-left: 25px;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody .calendar {
+  background: url("../image/calendar.gif") no-repeat left;
+  width: 150px;
+  padding-left: 25px;
+}
+/* Im disbledten Zustand ansonsten nicht sichtbar */
+.wrappview form.bearbeiten fieldset .tblhbea table tbody input.calendar:disabled {
+  background: url("../image/calendar.gif") no-repeat left;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody input.search:disabled {
+  background: url("../image/search-disabled.png") no-repeat left;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody input.redalert {
+  background-color: #df666c;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table thead {
+  border-bottom: 1px solid #3f3f3f;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table thead th {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 11px;
+  color: #717171;
+  text-decoration: none;
+  white-space: nowrap;
+  background: #F5F6F1;
+  text-align: center;
+  width: 175px;
+  padding-left: 0px;
+  line-height: 32px;
+}
+/* Farbe des Hintergrundes, um Randbreite von td zu kompensieren */
+.wrappview form.bearbeiten fieldset .tblhbea table thead th:nth-child(n+2) {
+  border-left: 1px solid #F5F6F1;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table thead th:last-child {
+  border-left: 1px solid #F5F6F1;
+}
+/* Abgerundete Kanten */
+.wrappview form.bearbeiten fieldset .tblhbea table thead tr:first-child th:first-child {
+  border-radius: 0.2em 0 0 0;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table thead tr:first-child th:last-child {
+  border-radius: 0 0.2em 0 0;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody tr:first-child td:first-child input {
+  border-radius: 0 0 0 0;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody tr:first-child td:last-child {
+  border-radius: 0 0 0 0;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody tr:last-child td:first-child input {
+  border-radius: 0 0 0 0.2em;
+}
+.wrappview form.bearbeiten fieldset .tblhbea table tbody tr:last-child td:last-child {
+  border-radius: 0 0 0.2em 0;
+}
+/* Autocomplete*/
+div.wicket-aa {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana;
+  font-size: 12px;
+  background-color: white;
+  border-width: 1px;
+  border-color: #cccccc;
+  border-style: solid;
+  padding: 2px;
+  margin: 1px 0 0 0;
+  text-align: left;
+}
+div.wicket-aa ul {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+}
+div.wicket-aa ul li.selected {
+  background-color: #B3C4AF;
+  padding: 2px;
+  margin: 0;
+}
+/* TABELLE ARCHIVIERUNGSDATENSATZ ERSTELLEN ENDE   */
+/* ANSICHT ADMINISTRATION => HALDE BEARBEITEN ENDE */

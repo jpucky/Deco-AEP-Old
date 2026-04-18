@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+
+</head>
+<body>
+    <wicket:panel>
+
+        <form action="forms.html" method="post" class="search searchForm1" wicket:id="searchForm">
+
+            <fieldset>
+
+                <div class="headline1">
+                    <div>Suchbegriffe</div>
+                    <a href="#"></a>
+                </div>
+
+                <div class="styled-select">
+                    <label for="vorn">Abfragejahr</label> <select name="n">
+                        <!-- <option value="1">2013 / 2014</option> -->
+                        <option value="1">
+                            2013 - <span wicket:id="curryear">[YEAR]</span>
+                        </option>
+                    </select>
+                </div>
+
+                <div class="dpvon">
+                    <label>Datum von <span class="df">(YYYYMMTT)</span>
+                    </label> <input type="text" value="" id="datepickerVon" wicket:id="txt-blgdatevon" />
+                </div>
+
+                <div class="dpbis">
+                    <label>Datum bis <span class="df">(YYYYMMTT)</span>
+                    </label> <input type="text" value="" id="datepickerBis" wicket:id="txt-blgdatebis" />
+                </div>
+
+                <div class="styled-select">
+                    <label for="vorn">Belegart</label> <select wicket:id="belegartt"></select>
+                </div>
+
+                <div wicket:id="listentypC">
+                    <div class="styled-select">
+                        <label for="vorn">Listen- /Belegtyp</label> <select wicket:id="listentyp"></select>
+                    </div>
+                </div>
+
+                </fieldset>
+                
+                <!-- 1 Scanning ausser Retouren: Dokument/Bestell-Nr  
+                <label wicket:id="labelTxtDokumentTyp">[Bestell-Nr. 0]</label> <input type="text" value=""
+                    wicket:id="txt-scdoctype" />
+-->
+
+                <!-- 2 Kunden-/LieferantenNr 
+                <label><div wicket:id="labelTxtKdLiefNr">[Kunden-Nr. 1]</div>
+                </label> <input type="text" value="" wicket:id="txt-kdnr" />
+-->
+
+                <!-- 3 Beleg-Nr (Scanning) /Bestell-Nr 
+                <label><div wicket:id="labelTxtBelegBestellNr">[Beleg-Nr. 2]</div>
+                </label> <input type="text" value="" wicket:id="txt-lfsnr" />
+-->
+
+                <!-- 4 Lieferantenname (Scanning) 
+                <label wicket:id="labelTxtLieferantName">[Lieferantenname]</label> <input type="text" value=""
+                    wicket:id="txt-lieferantname" />
+-->
+
+<!-- 
+                <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search" />
+ -->
+
+                <div wicket:id="txtPanelRecherche"></div> 
+ 
+<!--            </fieldset> -->
+<!-- 
+                <div class="deletesearch fontheader">
+                    <a href="#" wicket:id="deletesearch">Suchbegriffe löschen</a>
+                </div>
+                <div class="headline2">
+                    <div>Suchergebnisse</div>
+                </div>
+ -->
+<!--  
+                <div class="tblwrapper">
+                    <div class="tblscroll">
+    
+                        <div class="foundhint invisible">
+                            Bitte starten Sie eine Suche,<br>damit Ihnen Fundstellen angezeigt werden. 
+                        </div>
+                        <div class="searchhint invisible">
+                            Zu den von Ihnen gewählten Suchbegriffen wurden keine passenden Daten im Archiv gefunden.
+                            <p>
+                                Erweitern Sie die Suche mit Wildcards: '<b> * </b>' für beliebig viele Zeichen oder '<b>
+                                    ? </b>' für einzelne Zeichen.
+                            </p>
+                        </div>
+    
+                        <div class="searchBusy"></div>
+                        <table class="fixedHeaderTblRec">
+                            <thead>
+                                <tr>
+                                    <th scope="col" wicket:id="labelTblHeaderDokumenttyp">[D-Typ]</th>
+                                    <th scope="col">
+                                        <div wicket:id="labelTblHeaderKdLfNr">[Kunden-Nr.]</div></th>
+                                    <th scope="col">
+                                        <div wicket:id="labelTblHeaderBelegBestellNr">[Beleg-Nr.]</div></th>
+                                    <th scope="col">Datum</th>
+                                    <th scope="col" wicket:id="labelTblLieferantName" style="text-align: left">
+                                        [Lieferant-Name]</th>
+                                    <th scope="col" wicket:id="labelcol4">[B-Art]</th>
+                                    <th scope="col">S.</th>
+                                </tr>
+                            </thead>
+    
+                            <tbody wicket:id="wmcFsViewAjaxContainer">
+                                <tr wicket:id="fundstellen">
+                                    <th wicket:id="doktyp">[Dokumenttyp]</th>
+                                    <th wicket:id="kdnr">[KundenNr]</th>
+                                    <td wicket:id="lfsr">[BelegNr]</td>
+                                    <td wicket:id="datum">[Datum]</td>
+                                    <td wicket:id="liefname" style="text-align: left">[Lieferantname]</td>
+                                    <td wicket:id="belegart">[Filiale]</td>
+                                    <td wicket:id="seitenanz">[Seitenanz]</td>
+                                </tr>
+                            </tbody>
+    
+                        </table>
+                    </div>
+                </div>
+    
+                <div wicket:id="navigator">[dataview navigator]</div>
+       -->
+<!--
+            <div class="fontheader foundinfo">
+
+ 
+            <span wicket:id="show">[xxxx]</span> Suchergebnisse aus <span wicket:id="totalegal">[yyyy]</span> Belegen insg.</div>
+ -->
+            <div class="wrappdf">
+            <!-- 
+                    <div wicket:id="testFSLabel">][FS-Info]</div> -->
+                    <div wicket:id="klickhint"></div>
+                    <iframe id="imagepgframe" frameBorder="3" wicket:id="pdfbeleg"></iframe>
+            </div>
+
+        </form>
+
+
+    </wicket:panel>
+</body>
+</html>

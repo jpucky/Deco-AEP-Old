@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+
+<wicket:panel>
+ <wicket:extend>
+                
+        <fieldset>
+    
+            <label>Kunden-Nr.</label>
+            <input type="text" value="" wicket:id="txt-kdnr" />
+    
+            <label>Beleg-Nr.</label>
+            <input type="text" value="" wicket:id="txt-lfsnr" />
+    
+            <!-- BASEPANEL MARKUP MUSS WEGE DER DOM-STRUKTUR HIER BEDIENT WERDEN! START -->
+            <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search" />
+    
+            <div class="deletesearch fontheader">
+                <a href="#" wicket:id="deletesearch">Suchbegriffe löschen</a>
+            </div>
+            <!-- ENDE --> 
+    
+            <div class="headline2">
+                <div>Suchergebnisse</div>
+            </div>
+    
+        </fieldset>
+        
+        <div class="tblwrapper">
+            <div class="tblscroll">
+            
+                <div class="foundhint invisible">
+                    Bitte starten Sie eine Suche,<br>damit Ihnen Fundstellen angezeigt werden. 
+                </div>
+                <div class="searchhint invisible">
+                    Zu den von Ihnen gewählten Suchbegriffen wurden keine passenden Daten im Archiv gefunden.
+                    <p>
+                        Erweitern Sie die Suche mit Wildcards: '<b> * </b>' für beliebig viele Zeichen oder '<b> ? </b>'
+                        für einzelne Zeichen.
+                    </p>
+                </div>
+    
+                <div class="searchBusy"></div>
+                <!-- Funzt hier nicht -->
+                <!-- <div class="viewbusy"></div> -->
+                <table class="fixedHeaderTblRec">
+                    <thead>
+                        <tr>
+                            <th scope="col">Kunden-Nr.</th>
+                            <th scope="col">Beleg-Nr.</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col" wicket:id="labelcol4">[B-Art]</th>
+                            <th scope="col">S.</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody wicket:id="wmcFsViewAjaxContainer">
+                        <tr wicket:id="fundstellen">
+                            <!-- <td wicket:id="actions">[actions]</td> -->
+                            <td wicket:id="kdnr">[KundenNr]</td>
+                            <td wicket:id="lfsr">[BelegNr]</td>
+                            <td wicket:id="datum">[Datum]</td>
+                            <td wicket:id="belegart">[Filiale]</td>
+                            <td wicket:id="seitenanz">[Seitenanz]</td>
+                        </tr>
+                    </tbody>
+    
+                </table>
+            </div>
+        </div>
+    
+        <div wicket:id="navigator">[dataview navigator]</div>
+<!-- 
+    <div class="fontheader foundinfo">
+        <span wicket:id="show">[xxxx]</span> Suchergebnisse aus <span wicket:id="totalegal">[yyyy]</span> Belegen insg.
+    </div>
+ -->
+</wicket:extend>
+
+</wicket:panel>
+
+</body>
+</html>

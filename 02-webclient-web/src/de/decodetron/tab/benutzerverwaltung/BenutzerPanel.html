@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+
+<style>
+html,body {
+    margin: 0px;
+    padding: 0em;
+    background-color: #3f3f3f;
+}
+
+/**************************************************************************************************/
+/* Benutzer anlegen */
+#wrapper-ben-anlegen {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+}
+
+#wrapper-ben-anlegen fieldset {
+    margin: 5px 0px;
+    padding: 4px;
+    border: 0px;
+    /*border: 1px dashed #B4BED7;*/
+    background-color: #D41F29;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+#wrapper-ben-anlegen .benbearbeiten {
+    padding: 15px;
+    border: 0px solid red;
+    background-color: #E41F29;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+.font {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+}
+
+.benbearbeiten ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    /*background: lightgray;*/
+}
+
+.benbearbeiten ul li {
+    margin: 1px 0 0 0;
+}
+
+.benbearbeiten label {
+    margin: 12px 0px 0px 5px;
+    text-align: left;
+    vertical-align: top;
+    width: 123px;
+    display: inline-block;
+}
+
+.benbearbeiten select,.benbearbeiten input {
+    display: inline;
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid #B4BED7;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+/* ~~~~~~~~~~~~~~~~ Stdandardpasswort-Checkbox Anfang ~~~~~~~~~~~~~~~~~~ */
+/*~~~~~~~~~~~~~~~~ Für Debugging images in Lokales Verzeichnis legen ~~~ */
+.benbearbeiten label.myCheckbox {
+    
+}
+
+.benbearbeiten .myCheckbox input {
+    display: none;
+}
+
+.benbearbeiten label.myCheckboxlbl { /*
+    height: 0px;
+    position: relative;
+    top: -7px;
+    */
+    
+}
+
+.benbearbeiten .myCheckbox span {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: 7px solid white;
+    margin: -11px 0px 1px -5px;
+    background: url("check-yes.gif") top left no-repeat white;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+.benbearbeiten .myCheckbox span:before {
+    border: 1px solid #B4BED7;
+    content: '';
+    width: 32px;
+    height: 32px;
+    position: relative;
+    display: block;
+    left: -7px;
+    top: -7px;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+.benbearbeiten .myCheckbox input:checked+span {
+    background: url("check-no.gif") top left no-repeat white;
+}
+
+.benbearbeiten div.pwdcomponent:before {
+    content: '';
+    width: 330px;
+    height: 104px;
+    position: absolute;
+    display: block;
+    border: 1px dashed #B4BED7;
+}
+/* ~~~~~~~~~~~~~~~~ Stdandardpasswort-Checkbox Ende ~~~~~~~~~~~~~~~~~~ */
+.benbearbeiten select.ddbox {
+    padding: 5px 0px;
+    background: url("arr_down.png") no-repeat right #E9E9E7;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+.benbearbeiten select.ddgroups {
+    height: 80px;
+}
+
+input.btn {
+    margin-top: 20px;
+    line-height: 25px !important;
+    height: 25px !important;
+    width: 26% !important;
+    cursor: pointer;
+    color: blue;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+/*ff, ie extrawürste */
+@
+-moz-document url-prefix  () {
+     .benbearbeiten select {
+        padding-top: 7px;
+    }
+}
+
+.benbearbeiten select::-ms-expand {
+    display: none;
+}
+
+.benbearbeiten table .button {
+    width: 100px;
+}
+
+.benbearbeiten table {
+    margin: 15px 0 0 120px;
+}
+
+.benbearbeiten .message {
+    margin: 15px 0 0 123px;
+    color: white;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+    <wicket:panel>
+        <div id="wrapper-ben-anlegen">    
+            <form wicket:id="yesNoForm" action="" class="benbearbeiten font" autocomplete="off">
+                <ul>
+                   <fieldset>
+                        <li>
+                            <label>Vorname</label>
+                            <input name="" type="text" value="" wicket:id="Vorname"/>
+                        </li>
+
+                        <li>
+                            <label>Nachname</label>
+                            <input name="" type="text" value="" wicket:id="Nachname"/>
+                        </li>
+                        <li>
+                            <label>Login</label>
+                            <input name="" type="text" value="" wicket:id="Login"/>
+                        </li>                           
+                   </fieldset>
+
+                   <fieldset>
+
+                        <li class="chkbox">
+                            <label>Standardpasswort</label>
+                            <label class="myCheckbox">
+                                <input type="checkbox" wicket:id="defaultpwdbx"/>
+                                <span></span>
+                            </label>
+                        </li>  
+ 
+                        <li wicket:id="pwd1Container">
+                            <label>Passwort 1</label>
+                            <input name="" type="password" value="" wicket:id="Passwort 1"/>
+                        </li>
+                        
+                        <li wicket:id="pwd2Container">
+                            <label>Passwort 2</label>
+                            <input name="" type="password" value="" wicket:id="Passwort 2"/>
+                        </li>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <li>
+                            <label>Filter</label>
+                            <input name="" type="text" value="" wicket:id="Filter" />
+                        </li> 
+                        <li>
+                            <label>Gruppen</label>
+                            <select class="ddgroups" size="8" multiple="multiple" wicket:id="Gruppen">
+                                <option value="1000">Alle Listen</option>
+                                <option value="2">Apotheke</option>
+                                <option value="1002">GBtm</option>
+                                <option value="1001">GDefekten</option>
+                                <option value="3">Lieferant</option>
+                            </select>
+                        </li>
+                        <li>
+                            <div class="styled-select" wicket:id="lblCompDDVertrieb">
+                                <label>Vertriebsleitung</label>
+                                <select class="ddbox" wicket:id="Vertriebsleitung" title="Auswahl noch nicht möglich!"></select>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="styled-select" wicket:id="lblCompDDGebiet">
+                                <label>Gebiet</label>
+                                <select class="ddbox" wicket:id="Gebiet" title="Auswahl noch nicht möglich!"></select>
+                            </div>
+                        </li>   
+                    </fieldset>
+                    
+                    <fieldset>               
+                        <li>
+                            <label class="input"></label>
+                            <input class="btn" type="submit" wicket:id="noButton" value="Abbrechen" />
+                            <input class="btn" type="submit" wicket:id="yesButton" value="OK" />
+                        </li>
+                        
+                        <div class="message" wicket:id="feedback">
+                            [wicket-message] [wicket-message]
+                            [wicket-message] [wicket-message]
+                        </div>
+                    </fieldset>
+                </ul>
+            </form>
+        </div>
+
+    </wicket:panel>
+</body>
+</html>

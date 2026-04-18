@@ -1,0 +1,54 @@
+/* Hotfix Firefox 30.0, 26.06.2014 */
+/* Siehe: https://bugzilla.mozilla.org/show_bug.cgi?id=649849 */
+/* Siehe: http://red-team-design.com/making-html-dropdowns-not-suck/ */
+@-moz-document url-prefix() {
+  li div.styled-select, .tab-panel .ltc div.styled-select, .tab-panel form.search fieldset div.styled-select {
+    /*background-color: yellow;  */
+  
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+  }
+  li div.styled-select selecct, .tab-panel .ltc div.styled-select select, .tab-panel form.search fieldset div.styled-select select {
+    width: 170px;
+    margin: 0px 0px 1px 0px;
+    font-size: inherit;
+    padding: 7px 5px;
+    background-color: transparent;
+    opacity: 1;
+    -moz-appearance: none;
+    border: 0 none;
+    border-radius: 0px;
+    background: #e9e9e7;
+    cursor: pointer;
+  }
+  li div.styled-select::before,
+  li div.styled-select::after,
+  .tab-panel .ltc div.styled-select::before,
+  .tab-panel .ltc div.styled-select::after,
+  .tab-panel form.search fieldset div.styled-select::before,
+  .tab-panel form.search fieldset div.styled-select::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+  }
+  li div.styled-select::after, .tab-panel .ltc div.styled-select::after, .tab-panel form.search fieldset div.styled-select::after {
+    content: url("../image/arr_down36x30.png");
+    right: 0px;
+    top: 1px;
+    border: 0 none;
+    border-bottom: 0px solid #e9e9e7;
+    /*background-color: red;*/
+  
+  }
+  li div.styled-select::before, .tab-panel .ltc div.styled-select::before, .tab-panel form.search fieldset div.styled-select::before {
+    /* überdeckt das Systemelement in Kombination mit pointer-events: none; (FF > 30)*/
+  
+    bottom: 1px;
+    right: 0;
+    top: 0px;
+    border: 0 none;
+    width: 36px;
+    background-color: #e9e9e7;
+  }
+}

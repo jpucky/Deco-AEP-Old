@@ -1,0 +1,78 @@
+<project name="MyWebApp" default="buildAll" basedir=".">
+
+	<!-- Verzeichnisse -->
+	<property name="src.dir" value="src" />
+	<property name="res.dir" value="resources" />
+	<property name="web.dir" value="WebContent" />
+	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="dist.dir" value="war" />
+	<property name="war.file" value="${dist.dir}/aep.war" />
+	<property name="prod.files" value="prod-scripte" />
+
+	<target name="buildAll" depends="clean, init, compile, prepare-config, war" />
+
+	<!-- Clean -->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${web.dir}/classes" />
+	</target>
+
+	<!-- Verzeichnisse anlegen -->
+	<target name="init">
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<!-- Kompilieren -->
+	<target name="compile">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" encoding="UTF-8">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="prepare-config">
+		<copy todir="${classes.dir}" overwrite="true" encoding="UTF-8">
+			<fileset dir="${src.dir}">
+				<include name="**/*.txt" />
+				<include name="**/*.html" />
+				<include name="**/*.properties" />
+			</fileset>
+			<!-- überschreiben !!! -->
+			<fileset dir="${prod.files}">
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="${res.dir}">
+				<include name="**/*.xsl" />
+				<include name="**/*.pdf" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="war">
+		<war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+
+			<!-- Web Ressourcen -->
+			<fileset dir="${web.dir}">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+
+			<!-- Kompilierte Klassen -->
+			<classes dir="${classes.dir}" />
+
+			<!-- DB-Modul -->
+			<lib file="../01-dbmodul/dist/db-module.jar" />
+
+		</war>
+	</target>
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="../01-dbmodul/dist/db-module.jar" />
+	</path>
+
+</project>

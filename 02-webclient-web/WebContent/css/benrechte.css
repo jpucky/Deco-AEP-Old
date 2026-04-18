@@ -1,0 +1,245 @@
+/* ****************************************** */
+/* TABLE VIEWRIGHTS ANFANG                    */
+/* ****************************************** */
+.tab-panel .viewrights {
+  overflow: auto;
+  position: absolute;
+  height: 600px;
+  top: 167px;
+  left: 333px;
+  right: 15px;
+  bottom: 3px;
+  padding: 1px;
+  background: #3f3f3f;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+/* Tabelle Rights, Grundeinstellungen */
+.tab-panel .viewrights .hits {
+  display: inline-block;
+  margin: 14px 5px;
+  color: white;
+}
+.tab-panel .viewrights .pagination {
+  margin-left: 5px;
+  display: inline-block;
+  color: white;
+}
+.tab-panel .viewrights .pagination .first {
+  color: transparent;
+  padding: 4px 4px;
+  background: url("../image/satistik-firstpage.jpg") no-repeat center;
+}
+.tab-panel .viewrights .pagination .prev {
+  color: transparent;
+  padding: 4px 7px;
+  background: url("../image/satistik-previouspage.jpg") no-repeat center;
+}
+.tab-panel .viewrights .pagination .next {
+  color: transparent;
+  padding: 4px 7px;
+  background: url("../image/satistik-nextpage.jpg") no-repeat center;
+}
+.tab-panel .viewrights .pagination .last {
+  color: transparent;
+  padding: 4px 4px;
+  background: url("../image/satistik-lastpage.jpg") no-repeat center;
+}
+.tab-panel .viewrights .pagination span span em {
+  color: white;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+.tab-panel .viewrights .pagination span a, .pagination a {
+  color: #808080;
+  padding: 4px 2px;
+  font-weight: normal;
+  text-decoration: none;
+}
+.tab-panel .viewrights .pagination .goto a:BEFORE {
+  content: "|";
+  margin-right: 6px;
+}
+.tab-panel .viewrights table.rights {
+  border-spacing: 0;
+}
+.tab-panel .viewrights table.rights .even td {
+  background: #E8E8E8;
+}
+.tab-panel .viewrights table.rights .odd td {
+  background: #FFFFFF;
+}
+.tab-panel .viewrights table.rights th {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 11px;
+  color: #717171;
+}
+.tab-panel .viewrights table.rights th.static {
+  border-right: 2px solid #dddddd;
+  background: #F5F6F1;
+}
+.tab-panel .viewrights table.rights td.rotate {
+  width: 35px;
+  vertical-align: middle;
+  text-align: center;
+  border-left: 2px solid #dddddd;
+}
+.tab-panel .viewrights table.rights th.rotate {
+  height: 100px;
+  vertical-align: bottom;
+}
+.tab-panel .viewrights table.rights .rotate.copyuser input {
+  border: 0px solid white;
+  margin: 0px;
+  cursor: pointer;
+  background: url("../image/user-copy.png") no-repeat center;
+}
+/* Farben für Sektionsdaten */
+.tab-panel .viewrights table.rights tr.even .level0 {
+  background: rgba(220, 240, 240, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level1 {
+  background: rgba(248, 224, 224, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level2 {
+  background: rgba(247, 248, 224, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level3 {
+  background: rgba(202, 238, 185, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level4 {
+  background: rgba(236, 224, 248, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .levelunknown {
+  background: #fa5882;
+}
+/* Überschriftfarben für die Sektionen */
+.tab-panel .viewrights table.rights th.rotate.level0 > div {
+  background: rgba(220, 240, 240, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level1 > div {
+  background: rgba(248, 224, 224, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level2 > div {
+  background: rgba(247, 248, 224, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level3 > div {
+  background: rgba(202, 238, 185, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level4 > div {
+  background: rgba(236, 224, 248, 0.8);
+}
+/* Rotation, div-Wrapcontainer */
+.tab-panel .viewrights table.rights th.rotate > div {
+  overflow: hidden;
+  border-left: 2px solid #dddddd;
+  background: #F5F6F1;
+  position: relative;
+  top: 0px;
+  left: 50px;
+  height: 100%;
+  width: 35px;
+}
+/* Rotation, div-Wrapcontainer */
+.tab-panel .viewrights table.rights th.rotate > div {
+  overflow: hidden;
+  border-left: 2px solid #dddddd;
+  background: #F5F6F1;
+  position: relative;
+  top: 0px;
+  left: 50px;
+  height: 100%;
+  width: 35px;
+  -ms-transform: skew(-45deg, 0deg);
+  -moz-transform: skew(-45deg, 0deg);
+  -webkit-transform: skew(-45deg, 0deg);
+  -o-transform: skew(-45deg, 0deg);
+  transform: skew(-45deg, 0deg);
+}
+/* Rotation, span-Textcontainer */
+.tab-panel .viewrights table.rights th.rotate span {
+  position: absolute;
+  bottom: 30px;
+  left: -28px;
+  display: inline-block;
+  width: 85px;
+  text-align: left;
+  white-space: nowrap;
+  -ms-transform: skew(45deg, 0deg) rotate(315deg);
+  -moz-transform: skew(45deg, 0deg) rotate(315deg);
+  -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+  -o-transform: skew(45deg, 0deg) rotate(315deg);
+  transform: skew(45deg, 0deg) rotate(315deg);
+}
+/* ****************************************** */
+/* TABLE VIEWRIGHTS ENDE                      */
+/* ****************************************** */
+.tab-panel .viewrights .feedbackPanelINFO {
+  color: #86B404;
+}
+.tab-panel .viewrights .feedbackPanelERROR {
+  color: #E41F29;
+}
+.tab-panel .viewrights form.submitrights {
+  border: 0px;
+  padding: 0;
+  margin: 0;
+  padding-top: 0px;
+  margin-top: 20px;
+}
+.tab-panel .viewrights form.submitrights fieldset {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.tab-panel .viewrights form.submitrights table.tblsubmit {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+.tab-panel .viewrights form.submitrights table.tblsubmit th, .tab-panel .viewrights form.submitrights table.tblsubmit td {
+  border: 0px solid white;
+  padding-right: 5px;
+  margin: 0px;
+}
+.tab-panel .viewrights form.submitrights table.tblsubmit td {
+  text-align: left;
+}
+.tab-panel .viewrights form.submitrights table.tblsubmit th {
+  vertical-align: top;
+  width: 230px;
+}
+.tab-panel .viewrights input.btn2 {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+  border: 1px solid white;
+  height: 34px;
+  margin: 0px;
+  width: 100%;
+  background: #E41F29;
+  border-radius: 0.1em 0.1em 0.1em 0.1em;
+}
+.tab-panel .viewrights input.btn2:hover {
+  background: #BA171F;
+  cursor: pointer;
+}
+.tab-panel .viewrights input.filter[type="text"]:disabled {
+  background: #E9E9E7;
+}
+.tab-panel table.changeduser {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  background: lightgray;
+}
+.tab-panel table.changeduser, .tab-panel table.changeduser th, .tab-panel table.changeduser td {
+  border: 1px solid white;
+  padding: 5px;
+}

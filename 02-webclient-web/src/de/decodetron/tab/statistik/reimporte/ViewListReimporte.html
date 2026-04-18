@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+</head>
+<body>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+        <div class="viewbusy"></div>
+        <a wicket:id="csvdownload" class="csv">.csv</a>
+        <a wicket:id="pdfdownload" class="pdf">.pdf</a>
+        <span wicket:id="navigator" class="pagination">[dataview navigator]</span>
+        <span wicket:id="treffer" class="hits">[123]</span>
+
+                <div class="tblscroll">
+                    <table class="fixedHeaderTbl" cellpadding="0" cellspacing="0">
+                     
+                        <thead>
+                            <tr>
+                                <th class="invisible">RecId</th>
+                                <th wicket:id="AuftragDatum"><wicket:message key="labeltable.AuftragDatum"/></th>
+                                <th wicket:id="KundenNr"><wicket:message key="labeltable.KundenNr"/></th>
+                                <th wicket:id="AuftragsNr"><wicket:message key="labeltable.AuftragsNr"/></th>
+                                <th wicket:id="LieferscheinNr"><wicket:message key="labeltable.LieferscheinNr"/></th>
+                                
+                                <th wicket:id="PicklistenNr"><wicket:message key="labeltable.PicklistenNr"/></th>
+                                <th wicket:id="PZN"><wicket:message key="labeltable.PZN"/></th>
+                                <th wicket:id="Artikelbezeichnung"><wicket:message key="labeltable.Artikelbezeichnung"/></th>
+                                <th wicket:id="Menge"><wicket:message key="labeltable.Menge"/></th>
+                                
+                                <th class="currency" wicket:id="Preis"><wicket:message key="labeltable.Preis"/></th>
+                                <th class="currency" wicket:id="Betrag"><wicket:message key="labeltable.Betrag"/></th>
+                                <th wicket:id="LieferantNr"><wicket:message key="labeltable.LieferantNr"/></th>
+                                <th wicket:id="LieferantName"><wicket:message key="labeltable.LieferantName"/></th>
+                                <th wicket:id="Chargennummer"><wicket:message key="labeltable.Chargennummer"/></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr wicket:id="reimportliste">
+                                <td class="invisible" wicket:id="RecId">RecId</td>
+                                <td class="nowrap" wicket:id="AuftragDatum">AuftragDatum</td>
+                                <!-- 
+                                <td wicket:id="DokumentTyp">DokumentTyp</td>
+                                <td wicket:id="PositionsTyp">PositionsTyp</td>
+                                 -->
+                                <td wicket:id="KundenNr">KundenNr</td>
+                                <td wicket:id="AuftragsNr">AuftragsNr</td>
+                                <td wicket:id="LieferscheinNr">LieferscheinNr</td>
+                                <td wicket:id="PicklistenNr">PicklistenNr</td>
+                                <td wicket:id="PZN">PZN</td>
+                                <td class="nowrap" wicket:id="Artikelbezeichnung">Artikelbezeichnung</td>
+                                <td wicket:id="Menge">Menge</td>
+                                <td class="nowrap currency" wicket:id="Preis"></td>
+                                <td class="nowrap currency" wicket:id="Betrag"></td>
+                                <td class="nowrap" wicket:id="LieferantNr">LieferantNr</td>
+                                <td class="nowrap" wicket:id="LieferantName">LieferantName</td>
+                                <td wicket:id="Chargennummer">Chargennummer</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+</head>
+<body>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+                <div class="viewbusy"></div>
+                <a wicket:id="csvdownload" class="csv">.csv</a>
+                <a wicket:id="pdfdownload" class="pdf">.pdf</a>
+                <span wicket:id="navigator" class="pagination">[dataview navigator]</span>
+                <span wicket:id="treffer" class="hits">[123]</span>
+                
+                <div class="tblscroll">
+                    <table class="fixedHeaderTbl" cellpadding="0" cellspacing="0">
+                     
+                        <thead>
+                            <tr>
+                                <th class="invisible">RecId</th>
+                                <th wicket:id="Tagesdatum"><wicket:message key="labeltable.TagesDatum"/></th>
+                                <th wicket:id="KundenNr"><wicket:message key="labeltable.KundenNr"/></th>
+                                <th wicket:id="AuftragsNr"><wicket:message key="labeltable.AuftragsNr"/></th>
+                                
+                                <th wicket:id="LieferscheinNr"><wicket:message key="labeltable.LieferscheinNr"/></th>
+                                <th wicket:id="Fälligkeit"><wicket:message key="labeltable.Faelligkeit"/></th>
+                                <th  class="currency" style="padding-right: 5px;" wicket:id="Betrag"><wicket:message key="labeltable.Betrag"/></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr wicket:id="valutaliste">
+                                <td class="invisible" wicket:id="RecId">RecId</td>
+                                <td class="nowrap" wicket:id="Tagesdatum">Tagesdatum</td>
+                                <td wicket:id="KundenNr">KundenNr</td>
+                                <td wicket:id="AuftragsNr">AuftragsNr</td>
+                                <td wicket:id="LieferscheinNr">LieferscheinNr</td>
+                                <td class="nowrap" wicket:id="Fälligkeit">Fälligkeit</td>
+                                <td class="nowrap currency" style="padding-right: 5px;" wicket:id="Betrag">Betrag</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+</wicket:panel>
+</body>
+</html>

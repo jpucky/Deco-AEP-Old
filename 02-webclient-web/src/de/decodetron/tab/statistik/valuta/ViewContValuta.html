@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+<wicket:panel>
+
+             <form action="forms.html" method="post" class="search searchForm1" wicket:id="viewFilter">
+                <fieldset>
+
+                    <div class="switchpanel">
+                        <div class="dpvonstat">
+                            <label><wicket:message key="label.TagesDatumVon"/></label>
+                            <input type="text" value="" id="datepickerVonStat" wicket:id="TagesDatumVon" />
+                        </div>
+                        <div class="dpbisstat">
+                            <label><wicket:message key="label.TagesDatumBis"/></label>
+                            <input type="text" value="" id="datepickerBisStat" wicket:id="TagesDatumBis" />
+                        </div>
+                         <div wicket:id="repeating">
+                            <label><div wicket:id="label"></div></label>
+                            <input type="text" wicket:id="dummyItem" />
+                        </div>
+                    </div>
+
+                    <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search"/>
+
+                </fieldset>
+            
+                <div class="view">            
+                    <span wicket:id="viewList"/>
+                </div>                
+            </form>
+
+</wicket:panel>
+</body>
+</html>

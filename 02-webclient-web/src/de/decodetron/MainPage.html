@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>AEP InetArchiv</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="css/inet.css" />
+    <link rel="stylesheet" type="text/css" href="css/administration.css" />
+    
+    <link rel="stylesheet" type="text/css" href="demos/demos.css">
+    <link rel="stylesheet" type="text/css" href="css/tableDefaultTheme.css"/>
+    <link rel="stylesheet" type="text/css" href="themes/base/jquery.ui.all.css">
+
+    <!-- Wird seit Wicket 6.8.x gegen das Systeminterne ersetzt! -->
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>  
+    
+  
+    <script type="text/javascript" src="ui/jquery.ui.core.js"></script> 
+    <script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="ui/jquery.ui.datepicker.js"></script>
+    <script type="text/javascript" src="ui/i18n/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="js/jquery.fixedheadertable.js"></script>
+
+    <script type="text/javascript" src="js/inet.js"></script>
+    
+    <style type="text/css">
+    <!-- 
+    
+     -->
+    </style>
+
+    
+    <script type="text/javascript">    
+            $(document).ready(function() {
+                /* */
+            });         
+    </script>
+    
+    <!--[if lte IE 7]>
+            <p>Please upgrade your version of Internet Explorer.</p>
+        <![endif]-->
+    
+    <!--[if IE]>
+          <style type="text/css">
+            <link rel="stylesheet" type="text/css" href="css/iefix/ie.css" />        
+          </style>
+        <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- <div id="ajaxveil">xxxxx</div> -->
+
+    <div wicket:id="timerscript"></div>
+    
+    <div id="wrapper">
+
+        <div class="navsystem fontheader1">
+            <ul>
+                <li><a id="logout" wicket:id="logoutlink">ABMELDEN</a></li>
+                <li><a href="#" wicket:id="showUeberPage">ÜBER</a></li>
+                <li><a href="#" wicket:id="changepwdlink">PASSWORT</a></li>
+            </ul>
+        </div>
+
+        <div class="logoheader">
+            <div class="img-logo"></div>
+            <div class="whois-login">
+                    <span wicket:id="vorname"></span>
+                    <span wicket:id="name"></span>
+                    , Abmeldung in:
+                    <span wicket:id="timelabel" id="zeit">HH:MM</span>
+                    <div class="version" wicket:id="version">[VERSION]</div>
+            </div>
+        </div>
+                        
+        <div wicket:id="tabbedHandler"></div>
+
+    </div>
+    <!-- wrapper -->
+</body>
+</html>

@@ -1,0 +1,17 @@
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'gerd','kamper','gkamper@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'peter','winter','pwinter@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'martin','stumpe','mstumpe@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'frank','lerch','flerch@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'thomas','winter','twinter@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'helmut','wohland','hwohland@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'stefan','winter','swinter@decodetron.de','CE7A301E85D8938BCBDED73BAB523D8C36900562', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'aep','testuser','1010101','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Heumann','11950','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Actavis','00574','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Neuraxpharm','20792','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Glenmark-Generics','05774','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Kohlpharma','15685','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','European-Pharma','06714','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Mpapharma','04072','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Axicorp','06426','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);
+insert into user(id, vorname, nachname, login, passwd, anlagedatum) values (null,'','Emramed','07741','7C222FB2927D828AF22F592134E8932480637C0D', CURRENT_TIMESTAMP);

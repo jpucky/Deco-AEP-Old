@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+<wicket:panel>
+
+             <form action="forms.html" method="post" class="search searchForm1" wicket:id="formListSuche">
+                <fieldset>
+<!-- 
+                    <div class="headline1">
+                        <div>SUCHBEGRIFFE</div>
+                        <a href="#"></a>
+                    </div>
+-->
+                    <div class="switchpanel">
+<!--                     
+                        <div class="styled-select">
+                            <label>Listentyp</label>
+                            <select wicket:id="listentyp">
+                                <span wicket:id="listentypitem">
+                                    <option wicket:id="option">[OPTION1]</option>
+                                </span>
+                            </select>
+                        </div>
+ -->
+  
+                        <div wicket:id="txtd"><label>Datum</label> <input type="text" value="" wicket:id="txtdd" /></div>
+                        <div wicket:id="txtt"><label>PosTyp</label> <input type="text" value="" wicket:id="txttt"/></div>
+                        <div wicket:id="txtr"><label>LieferantNr</label> <input type="text" value="" wicket:id="txtrr"/></div>
+                        <div wicket:id="txta"><label>LieferantName</label> <input type="text" value="" wicket:id="txtaa"/></div>
+                        <div wicket:id="txtp"><label>PZN</label> <input type="text" value="" wicket:id="txtpp"/></div>
+                        <div wicket:id="txtz"><label>Artikelbezeichnung</label> <input type="text" value="" wicket:id="txtzz"/></div>
+                        <div wicket:id="txtc"><label>ClubKz</label> <input type="text" value="" wicket:id="txtcc"/></div>
+                        <div wicket:id="txtb"><label>Bestand</label> <input type="text" value="" wicket:id="txtbb"/></div>                        
+
+                     
+                        <div wicket:id="txth"><label>Habbeldebufdie</label> <input type="text" value="" wicket:id="txt-habbel"/></div>
+
+                    </div>
+
+                    <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search"/>
+
+                </fieldset>
+            
+                <div class="view">            
+                    <span wicket:id="listview"/>
+                </div>                
+            </form>
+
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+
+        <div class="view halde">
+            <!-- 
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+             -->
+
+               <a class="download" wicket:id="downloadOffeneScan">Download</a>
+                <a wicket:id="refreshOffeneScan" class="refresh">
+                    <img src="image/refresh.png" alt="Seite neu laden" title="Ansicht aktualisieren"/>
+                </a>
+                <div class="info">
+                   <span wicket:id="scancnt">[1234]</span> offene Scandateien <span wicket:id="scandate">[date]</span>
+                </div>
+                <iframe class ="" frameBorder="0" wicket:id="offeneScan"></iframe>                        
+
+                <div class="callout border-callout">
+                    <a href="#close" title="Close" class="closehaldehelp">x</a>
+                    <!-- <wicket:message key="help.halde.text"/> -->
+                    <span wicket:id="helptext">[Hilfetext]</span>
+                    <p class="border-notch-left notchleft"></p>
+                    <p class="notchleft"></p>
+                </div>
+
+                <a class="download" wicket:id="downloadOffeneArchivierung">Download</a>     
+                <a wicket:id="refreshOffeneArchivierung" class="refresh">
+                    <img src="image/refresh.png" alt="Seite neu laden" title="Ansicht aktualisieren"/>
+                </a> 
+                <div class="info"><span wicket:id="oacnt">[1234]</span> offene Archivierungsdatensätze <span wicket:id="oadate">[date]</span></div> 
+                <iframe class ="" frameBorder="0" wicket:id="offeneArchivierung"></iframe>
+        </div>
+
+    </wicket:panel>
+</body>
+</html>

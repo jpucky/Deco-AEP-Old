@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+<wicket:panel>
+
+             <form action="forms.html" method="post" class="search searchForm1" wicket:id="viewFilter">
+                <fieldset>
+                    <div class="switchpanel">
+                         <div class="dpvonstat">
+                             <label><wicket:message key="label.AuftragDatumVon"/></label>
+                             <input type="text" id="datepickerVonStat" value="" wicket:id="AuftragDatumVon" />                          
+                         </div>
+                         <div class="dpbisstat">  
+                             <label><wicket:message key="label.AuftragDatumBis"/></label>
+                             <input type="text" id="datepickerBisStat" value="" wicket:id="AuftragDatumBis" />
+                         </div>
+                        
+                         <div wicket:id="repeating">
+                            <label><div wicket:id="label"></div></label>
+                            <input type="text" wicket:id="dummyItem" />
+                         </div>
+                         
+                        <!-- 
+                        <label><wicket:message key="label.KundenNr"/></label> <input type="text" value="" wicket:id="KundenNr" />
+                        <label><wicket:message key="label.AuftragsNr"/></label> <input type="text" value="" wicket:id="AuftragsNr" />
+                        <label><wicket:message key="label.LieferscheinNr"/></label> <input type="text" value="" wicket:id="LieferscheinNr" />
+                        
+                        <label><wicket:message key="label.PicklistenNr"/></label> <input type="text" value="" wicket:id="PicklistenNr" />
+                        <label><wicket:message key="label.PZN"/></label> <input type="text" value="" wicket:id="PZN" />
+                        <label><wicket:message key="label.Artikelbezeichnung"/></label> <input type="text" value="" wicket:id="Artikelbezeichnung" />
+                        <label><wicket:message key="label.Menge"/></label> <input type="text" value="" wicket:id="Menge" />
+                        
+                        <label><wicket:message key="label.Preis"/></label> <input type="text" value="" wicket:id="Preis" />
+                        <label><wicket:message key="label.Betrag"/></label> <input type="text" value="" wicket:id="Betrag" />
+                        <label><wicket:message key="label.Apothekenname"/></label> <input type="text" value="" wicket:id="Apothekenname" />
+                        <label><wicket:message key="label.InhaberName"/></label> <input type="text" value="" wicket:id="InhaberName" />
+                        
+                        <label><wicket:message key="label.Strasse"/></label> <input type="text" value="" wicket:id="Strasse" />
+                        <label><wicket:message key="label.Plz"/></label> <input type="text" value="" wicket:id="Plz" />
+                        <label><wicket:message key="label.Ort"/></label> <input type="text" value="" wicket:id="Ort" />
+                        <label><wicket:message key="label.Chargennummer"/></label> <input type="text" value="" wicket:id="Chargennummer" />
+                         -->
+                    </div>
+                    <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search"/>
+                </fieldset>
+
+                <div class="view">
+                    <span wicket:id="viewList"/>
+                </div>                
+            </form>
+
+</wicket:panel>
+</body>
+</html>

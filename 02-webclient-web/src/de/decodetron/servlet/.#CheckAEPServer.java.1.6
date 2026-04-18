@@ -1,0 +1,112 @@
+// $Log: CheckAEPServer.java,v $
+// Revision 1.6  2014/10/01 22:02:53  tw
+// Lieferantenname Textfeldanbindung.
+//
+// Revision 1.5  2014/06/26 14:15:55  tw
+// Serverguard-kram fuer Frank.
+//
+// Revision 1.4  2014/06/26 11:32:37  tw
+// Serverguard-kram-dummy fuer Frank.
+//
+// Revision 1.3  2014/06/12 12:43:32  tw
+// Serverguard-kram-dummy fuer Frank.
+//
+// Revision 1.2  2014/06/12 12:31:14  tw
+// Serverguard-kram-dummy fuer Frank.
+//
+// Revision 1.1  2014/06/12 12:30:18  tw
+// Serverguard-kram-dummy fuer Frank.
+//
+//
+
+package de.decodetron.servlet;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import de.decodetron.AEPApplication;
+
+/**
+ * Kleine verÃ¤ppelseite fÃ¼r Frank fÃ¼r sein wasweisich-Serverguard ... . Mal gucken, ob er
+ * nachhakt. Mal die primitivo-old-school Variante fÃ¼r Seitenerzeugung, hab ich ja nie richtig
+ * kennengelernt ...
+ * 
+ * @author Thomas Winter
+ * @since 12.06.2014
+ */
+public class CheckAEPServer extends GenericServlet {
+
+    @Override
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
+
+        out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//DE\"><html>");
+        out.println("<title>Serverguard Test</title>");
+        out.println("<style type=\"text/css\">");
+        out.println("#wrapper {position:relative; margin: 150px auto; width:300px;}");
+        out.println(".ok {background-color:lightgreen; padding: 5px;}");
+        out.println(".notok {background-color:#FA5858; padding: 5px;}");
+        out.println(".table { border-collapse: collapse; border-spacing: 0; width: 100%}");
+        out.println(".checksum {border-style:double; border-top-color:black }");
+        out.println("table td{ border: 2px solid lightgray}");
+        out.println("</style>");
+        out.println("<body>");
+        out.println("<div id=\"wrapper\">");
+
+        out.println("<div class=\"serverinfo\">");
+        out.println("Servername    : <b>" + req.getServerName() + "</b><br/>");
+        out.println("Serverport    : <b>" + req.getServerPort() + "</b><br/>");
+        out.println("Serverversion : <b>" + getServletContext().getServerInfo() + "</b><br/>");
+        out.println("Date          : <b>" + sdf.format(new Date(System.currentTimeMillis())) + "</b><br/>");
+        out.println("<br/>");
+        out.println("</div>");
+
+        boolean dbUserExists = new File(AEPApplication.get().getModel().getFileUserDB()).exists();
+        boolean dbRechercheExists = AEPApplication.get().getDBRecherche().dbAlive();
+                //&& AEPApplication.get().getDBRechercheScan().dbAlive();
+				//TODO: Das hier aktivieren wenn der Index befüllt ist!
+        boolean dbStatistikExists = AEPApplication.get().statistikAliveCheck();
+
+        out.println("<table class=\"table\" style=\"\">");
+        out.println("<tr>");
+        out.print("<td>DB - User: </td>");
+        out.print("<td class=\"" + (dbUserExists ? "ok" : "notok") + "\"><b>" + (dbUserExists ? "1" : "0")
+                + "</b></td>");
+        out.println("</tr>");
+
+        out.println("<tr>");
+        out.print("<td>DB - Recherche: </td>");
+        out.print("<td class=\"" + (dbRechercheExists ? "ok" : "notok") + "\"><b>" + (dbRechercheExists ? "1" : "0")
+                + "</b></td>");
+        out.println("</tr>");
+
+        out.println("<tr>");
+        out.print("<td>DB - Statistik: </td>");
+        out.print("<td class=\"" + (dbStatistikExists ? "ok" : "notok") + "\"><b>" + (dbStatistikExists ? "1" : "0")
+                + "</b></td>");
+        out.println("</tr>");
+
+        String checkSum = dbUserExists && dbRechercheExists && dbStatistikExists ? "drei" : "fehler";
+        String clCs = "drei".equals(checkSum) ? "ok" : "notok";
+
+        out.println("<tr class=\"checksum\">");
+        out.print("<td><b>DB - Checksumme: </b></td>");
+        out.print("<td class=\"" + clCs + "\"><b>" + checkSum + "</b></td>");
+        out.println("</tr>");
+
+        out.println("</table>");
+
+        out.println("</div></body></html>");
+    }
+}

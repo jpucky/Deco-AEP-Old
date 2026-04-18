@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+
+<style>
+html,body {
+	margin: 0px;
+	padding: 0em;
+    background-color: #3f3f3f;
+}
+
+#wrapper-ben-anlegen {
+	position: relative;
+	margin: 0 auto;
+	width: 400px;
+}
+
+form.benbearbeiten fieldset{
+    border: 0px solid red;
+    background-color: #E41F29;
+}
+.font { font-family: Arial; font-style: normal; font-weight: bold; font-size: 12px; color: white;}
+
+.benbearbeiten ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+    /*background: lightgray;*/
+}
+
+.benbearbeiten ul li {
+	margin: 1px 0 0 0;
+}
+
+.benbearbeiten label {
+    margin-left: 5px;
+    text-align: left;
+    width: 123px;
+    display: inline-block;
+}
+.benbearbeiten select,
+.benbearbeiten input, 
+.benbearbeiten span.input{
+     width: 200px;
+     height: 35px;
+     line-height: 35px;
+     box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+     border: 1px solid #B4BED7;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+.benbearbeiten select{padding: 5px 0px; background: url("image/arr_down.png") no-repeat right #E9E9E7;
+  -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none;
+  appearance: none; text-indent: 0.01px; text-overflow: '';}
+  
+input.btn{
+  margin-top: 20px;
+  line-height: 25px !important;
+  height: 25px !important;
+  width: 26% !important; 
+  cursor:pointer;
+  color: blue;
+   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+/*ff, ie extrawürste */
+@-moz-document url-prefix() {
+    .benbearbeiten select {
+        padding-top: 7px;
+   }
+}
+.benbearbeiten select::-ms-expand{display:none;}
+
+.benbearbeiten table .button{width: 100px;}
+.benbearbeiten table{ margin: 15px 0 0 120px;}
+.benbearbeiten .message { margin: 15px 0 0 123px; width: 250px; color: white;}
+
+</style>
+
+</head>
+
+<body>
+    <wicket:panel>
+        <div id="wrapper-ben-anlegen">    
+            <form wicket:id="yesNoForm" action="" class="benbearbeiten font" autocomplete="off">
+    
+                <fieldset>
+                    <ul>
+                        <li>
+                            <label>Vorname</label>
+                            <input name="" type="text" value="" wicket:id="Vorname"/>
+                        </li>
+
+                        <li>
+                            <label>Nachname</label>
+                            <input name="" type="text" value="" wicket:id="Nachname"/>
+                        </li>
+                        <li>
+                            <label>Login</label>
+                            <input name="" type="text" value="" wicket:id="Login"/>
+                        </li>
+ 
+                        <li>
+                            <label>Passwort 1</label>
+                            <input name="" type="password" value="" wicket:id="Passwort 1"/>
+                        </li>
+                        <li>
+                            <label>Passwort 2</label>
+                            <input name="" type="password" value="" wicket:id="Passwort 2"/>
+                        </li>
+
+                        <li>
+                            <label>Filter</label>
+                            <input name="" type="text" value="" wicket:id="Filter" />
+                        </li>
+                        <li>
+                            <label>Gruppen</label>
+                            <select wicket:id="Gruppen"></select>
+                        </li>
+                        <li>
+                            <label wicket:id="lblVertriebsleitung">[Blah]</label>
+                            <select wicket:id="Vertriebsleitung"></select>
+                        </li>
+
+                        <li>
+                            <label wicket:id="lblGebiet">[Blub]</label>
+                            <select wicket:id="Gebiet"></select>
+                        </li>   
+                        
+                        <li>
+                            <label class="input"></label>
+                            <input class="btn" type="submit" wicket:id="noButton" value="Abbrechen" />
+                            <input class="btn" type="submit" wicket:id="yesButton" value="OK" />
+                        </li>
+  
+                    </ul>
+
+                    <div class="message" wicket:id="feedback">
+                        [wicket-message] [wicket-message]
+                        [wicket-message] [wicket-message]
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </wicket:panel>
+</body>
+</html>

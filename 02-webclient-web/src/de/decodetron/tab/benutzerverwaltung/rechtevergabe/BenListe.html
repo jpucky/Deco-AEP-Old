@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+
+</head>
+
+<body>
+
+
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+<link rel="stylesheet" type="text/css" href="css/benrechte.css"/>
+<style>
+
+</style>
+
+        <div class="viewrights">
+                
+            <div class="viewbusy"></div>
+             
+            <form wicket:id="usernew" action="">
+                <input style="width: 150px; margin: 5px 1px;" class="btn2" type="submit" value="Neuer Benutzer"/>
+            </form>
+            <!-- <a wicket:id="test">UserNeu</a> -->
+
+            <span wicket:id="navigator" class="pagination">[dataview navigator]</span>
+            <span wicket:id="treffer" class="hits">[123]</span>
+            <table class="rights" wicket:id="table"></table>
+
+            <form class="submitrights" wicket:id="rechteForm" action="" style="">
+                <fieldset style="">
+    
+                    <table class="tblsubmit">
+                        <tr>
+                            <th><input class="btn2" type="submit" value="Abbrechen" wicket:id="cancelbutton"/></th>
+                            <th><input class="btn2" type="submit" value="Speichern" wicket:id="savebutton"/></th>
+                            <td>
+                                <div wicket:id="feedback">
+                                    [wicket-message] [wicket-message]
+                                    [wicket-message] [wicket-message]
+                                </div>
+                            </td>
+                        </tr>
+                       <!-- 
+                        <tr>
+                            <td><label>Testfeld</label>:</td>
+                            <td><input wicket:id="txttest" type="text" size="20" /> </td>
+                        </tr>
+                        -->
+                    </table>                
+                </fieldset> 
+            </form>
+            
+            <a href="#" wicket:id="deleteuser">deleteuser</a>
+            <a href="#" wicket:id="pwdreset">pwdreset</a>
+            
+        </div>
+
+</wicket:panel>
+
+</body>
+</html>

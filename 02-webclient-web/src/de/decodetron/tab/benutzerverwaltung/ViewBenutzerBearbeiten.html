@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+<wicket:panel>
+ 
+            <script type="text/javascript">    
+                    $(document).ready(function() {
+                        $(".deletesearch a").click(function(){
+                            $(".switchpanel input[type=text]").val('');
+                        });  
+                    });         
+            </script>
+ 
+             <form action="forms.html" method="post" class="search searchForm1" wicket:id="viewFilter">
+                <fieldset>
+                
+                    <!-- <input type="submit" value="BENUTZER ANLEGEN" class="search"/> -->
+                          
+                    <div class="switchpanel">
+                    
+                        <div class="headline1">
+                            <div>Suchbegriffe</div>
+                            <!-- <a href="#" class="imgswitch-on-red"></a> -->
+                            <span wicket:id="ben-anlegen-dlg" />
+                            <span wicket:id="ben-aendern-dlg"/>
+                            <span wicket:id="ben-delete-dlg" />
+                        </div>
+                
+                        <div wicket:id="repeating">
+                            <label><div wicket:id="label"></div></label>
+                            <input type="text" wicket:id="dummyItem" />
+                        </div>
+                        <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search"/>
+                        <div class="deletesearch fontheader"><a href="#">Suchbegriffe löschen</a></div>
+                        <!-- <input type="submit" value="BENUTZER ANLEGEN" class="search"/> -->
+                    </div>                     
+                </fieldset>
+            
+                <div class="view">
+                    <div class="viewbusy"></div>        
+                    <span wicket:id="viewList"/>
+                </div>                
+            </form>
+
+</wicket:panel>
+</body>
+</html>

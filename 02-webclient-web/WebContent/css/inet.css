@@ -1,0 +1,971 @@
+@import "style.css";
+
+@import "ffselect.css";
+html, body {
+  margin: 0px;
+}
+#wrapper {
+  margin: 0 auto;
+  border: 0px solid black;
+}
+.viewbusy {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  background: url("../image/inet-ajax-loader.gif") no-repeat center;
+  background-color: black;
+  opacity: 50%;
+  filter: alpha(opacity=50);
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: wait;
+}
+.df {
+  font-size: 10px;
+}
+.invisible {
+  display: none;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.version {
+  position: absolute;
+  right: 0px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 8px;
+  color: white;
+}
+.fontshadow1 {
+  text-shadow: #656565 1px 1px 0px;
+}
+.fontheader1 {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: white;
+}
+.fontheader2 {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: #9D9D9D;
+}
+.fontnavigation {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: #919090;
+}
+.fontsearch1 {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+.fontsearchbtn {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+}
+.fontnavaepinetactive {
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+}
+.fontnavaepinetinactive {
+  color: #9d9d9d;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+}
+.fontversion {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 8px;
+  color: white;
+}
+.fonttype1 {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 11px;
+  color: #717171;
+}
+.fonttype2 {
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 17px;
+  color: #ffffff;
+}
+.navsystem {
+  float: left;
+  background: url("../image/login-background.png") left top repeat;
+  width: 100%;
+  height: 35px;
+}
+.navsystem ul {
+  list-style-type: none;
+  position: relative;
+  right: 22px;
+}
+.navsystem ul li {
+  float: right;
+  margin: 7px 0px 0px 15px;
+}
+.navsystem ul li a {
+  text-decoration: none;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: white;
+}
+.navsystem ul li a:hover {
+  color: #cacaca;
+}
+.navsystem ul li a:active {
+  color: #ffffff;
+}
+.logoheader {
+  float: left;
+  width: 100%;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: #9D9D9D;
+}
+.logoheader .img-logo {
+  background: url("../image/inet-logo-aep-direkt.png") left top no-repeat;
+  width: 313px;
+  height: 46px;
+  margin: 8px 0px 0px 5px;
+}
+.logoheader .whois-login {
+  float: right;
+  text-align: right;
+  position: relative;
+  right: 22px;
+  bottom: 50px;
+}
+.tab-row {
+  background: url(../image/inet-mainnav-background.png) left top repeat-x;
+  float: left;
+  height: 65px;
+  width: 100%;
+}
+.tab-row ul {
+  list-style-type: none;
+  margin-left: 10px;
+  padding: 0;
+  position: relative;
+  top: 13px;
+}
+.tab-row ul li {
+  display: inline;
+  margin-right: 24px;
+}
+.tab-row ul li a:hover {
+  color: #575757;
+}
+.tab-row ul li a {
+  color: #9d9d9d;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  padding: 9px 24px;
+  text-decoration: none;
+}
+.tab-row ul li.selected a {
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  padding: 9px 24px;
+  text-decoration: none;
+  background-color: #323a45;
+}
+/* RECHERCHE */
+.tab-panel {
+  float: left;
+}
+/* STATISTIK BENUTZERVERWALTUNG ADMINISTRATION */
+.tab-panel .ltc {
+  width: 100%;
+  margin-left: 10px;
+  border: 0 solid #000;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+  border-left: 1px solid #e9e9e7;
+  border-right: 1px solid #e9e9e7;
+  padding: 0;
+}
+.tab-panel .wrappdf {
+  top: 168px;
+  left: 333px;
+  right: 15px;
+  position: absolute;
+}
+.tab-panel .wrappdf .viewpdf {
+  text-align: center;
+  vertical-align: center;
+  margin-left: 0em;
+  padding: 345px 0em;
+  background: #3f3f3f;
+  font-size: 17px;
+  color: #ffffff;
+}
+.tab-panel .wrappdf iframe {
+  width: 100%;
+  height: 687px;
+  border: 0px;
+  overflow: hidden;
+}
+.tab-panel form.search {
+  float: left;
+  width: 320px;
+  margin-left: 10px;
+  padding: 0px;
+  border: 0px solid black;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+  border-left: 1px solid #e9e9e7;
+  border-right: 1px solid #e9e9e7;
+  border-bottom: 1px solid #e9e9e7;
+}
+.tab-panel form.search fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.tab-panel form.search fieldset .dpvon img.ui-datepicker-trigger {
+  position: absolute;
+  top: 251px;
+  left: 305px;
+  cursor: pointer;
+}
+.tab-panel form.search fieldset .dpbis img.ui-datepicker-trigger {
+  position: absolute;
+  top: 282px;
+  left: 305px;
+  cursor: pointer;
+}
+/* IE-Selectbox Hintergrundfarbe überdeckt ansonsten Pfeil */
+select:focus::-ms-value {
+  background-color: transparent;
+  color: #000;
+}
+.ie10 .tab-panel form.search fieldset .dpvon img.ui-datepicker-trigger, .ie11 .tab-panel form.search fieldset .dpvon img.ui-datepicker-trigger {
+  position: absolute;
+  top: 250px;
+  left: 305px;
+  cursor: pointer;
+}
+.ie10 .tab-panel form.search fieldset .dpbis img.ui-datepicker-trigger, .ie11 .tab-panel form.search fieldset .dpbis img.ui-datepicker-trigger {
+  position: absolute;
+  top: 280px;
+  left: 305px;
+  cursor: pointer;
+}
+.headline {
+  height: 42px;
+  margin: 0px 0px 1px 0px;
+  background: #9FA7B4;
+  font-size: 17px;
+  color: #ffffff;
+}
+.tab-panel form.search fieldset .headline1, .ltc .headline1 {
+  width: 320px;
+  height: 42px;
+  margin: 0px 0px 1px 0px;
+  background: #9FA7B4;
+  font-size: 17px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+}
+.tab-panel form.search .headline2 {
+  height: 42px;
+  margin: 0px 0px 1px 0px;
+  background: #9FA7B4;
+  font-size: 17px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+}
+.tab-panel form.search fieldset .headline1 div, .tab-panel .ltc .headline1 div, .headline2 div {
+  display: inline;
+  line-height: 42px;
+  margin-left: 22px;
+}
+.imgtoggle {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: 10px;
+  width: 24px;
+  height: 25px;
+}
+.tab-panel form.search fieldset .imgswitch-on {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: 10px;
+  width: 24px;
+  height: 25px;
+  background: url("../image/inet-btn-minus.png") center center no-repeat;
+}
+.tab-panel form.search fieldset .imgswitch-off {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: 10px;
+  width: 24px;
+  height: 25px;
+  background: url("../image/inet-btn-plus.png") center center no-repeat;
+}
+.tab-panel form.search fieldset .imgswitch-on-red {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: 10px;
+  width: 24px;
+  height: 25px;
+  background: url("../image/inet-btn-plus-rot.png") center center no-repeat;
+}
+.tab-panel form.search fieldset .imgswitch-off-red {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: 10px;
+  width: 24px;
+  height: 25px;
+  background: url("../image/inet-btn-minus-rot.png") center center no-repeat;
+}
+.tab-panel form.search fieldset input.search {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: #656565 1px 1px 0px;
+  border: 0px;
+  height: 34px;
+  margin: 0px 0px 1px 0px;
+  width: 100%;
+  background: #E41F29;
+}
+.tab-panel form.search fieldset input.search:hover {
+  background: #BA171F;
+  cursor: pointer;
+}
+.tab-panel form.search fieldset label, .tab-panel .ltc label {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  margin-left: 22px;
+  display: inline-block;
+  width: 123px;
+  text-indent: -5px;
+}
+.selectInput {
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  width: 170px;
+  background: #E9E9E7;
+  padding: 7px 0px;
+  text-indent: 9px;
+}
+.tab-panel form.search fieldset select, .tab-panel .ltc .styled-select select {
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  width: 170px;
+  background: #E9E9E7;
+  padding: 7px 0px;
+  text-indent: 9px;
+  cursor: pointer;
+}
+.tab-panel form.search fieldset input {
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  width: 170px;
+  background: #E9E9E7;
+  padding: 7px 0px;
+  text-indent: 9px;
+}
+.tab-panel form.search fieldset input:disabled {
+  background: #D9D9D7;
+}
+.tab-panel form.search fieldset input[type="submit"]:disabled {
+  background: #D41E29;
+  cursor: default;
+}
+.tab-panel form.search fieldset .styled-select select, .tab-panel .ltc .styled-select select {
+  padding: 7px 5px;
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  height: 31px;
+  background: url("../image/arr_down.png") no-repeat right #e9e9e7;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+.tab-panel form.search fieldset .styled-select select::-ms-expand, .tab-panel .ltc div.styled-select select::-ms-expand {
+  display: none;
+  /* ie10 extrawurst*/
+}
+.ie10 .tab-panel form.search fieldset .styled-select select, .ielt10 .tab-panel form.search fieldset .styled-select select {
+  background: #e9e9e7;
+}
+.ie10 .tab-panel form.search fieldset .styled-select select option:hover, .ielt10 .tab-panel form.search fieldset .styled-select select option:hover {
+  background: #80C0E8;
+}
+.tab-panel form.search .deletesearch {
+  margin: 5px 0px 5px 1px;
+}
+.tab-panel form.search .deletesearch a {
+  text-decoration: none;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: #9D9D9D;
+}
+.tab-panel form.search .foundinfo {
+  padding: 5px 0px 5px 1px;
+  background: #9FA7B4;
+}
+.tab-panel form.search .foundinfo span {
+  font-weight: bold;
+}
+.tab-panel form.search .foundinfo span:nth-child(1) {
+  margin-left: 5px;
+}
+.tab-panel form.search .searchhint b {
+  color: black;
+}
+.tab-panel form.search .searchBusy {
+  height: inherit;
+  width: inherit;
+  text-align: center;
+  position: absolute;
+  background: url("../image/inet-ajax-loader.gif") no-repeat center;
+}
+.tab-panel form.search .foundhint, .tab-panel form.search .searchhint {
+  background-color: #9FA7B4;
+  padding: 0.5em;
+  margin: 4em 2em 0em 2em;
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.45);
+}
+.tab-panel form.search .tblwrapper {
+  /*hält die Fehlermeldung auf Position*/
+  position: relative;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+.tab-panel form.search .tblwrapper .tblscroll {
+  background: #E8E8E8;
+}
+.tab-panel form.search .tblwrapper .tblscroll table tbody {
+  font-size: 11px;
+}
+.tab-panel form.search .tblwrapper .tblscroll table {
+  line-height: 18px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+.tab-panel form.search .tblwrapper .tblscroll table thead {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  color: #9D9D9D;
+  white-space: nowrap;
+}
+.tab-panel form.search .tblwrapper .tblscroll table tbody tr.dk {
+  background: #FFFFFF;
+}
+.tab-panel form.search .tblwrapper .tblscroll table th, .tab-panel form.search .tblwrapper .tblscroll table td {
+  border: 1px solid white;
+  padding: 0 1px;
+}
+.tab-panel form.search .tblwrapper .tblscroll table tbody tr:hover th, .tab-panel form.search .tblwrapper .tblscroll table tbody tr:hover td {
+  background: #9FA7B4;
+  cursor: pointer;
+}
+/*********************************************************************/
+.tab-panel form.search ul.pagination {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  border-radius: 3px;
+  display: inline-block;
+}
+.tab-panel form.search .pagination > li {
+  display: inline;
+}
+.tab-panel form.search .pagination > li > a, .tab-panel form.search .pagination > li > span {
+  position: relative;
+  float: left;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #000000;
+  background-color: #e9e9e7;
+  border: 1px solid white;
+  margin-left: -1px;
+  padding: 2px 5px;
+}
+.tab-panel form.search .pagination > li:first-child > a, .tab-panel form.search .pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.tab-panel form.search .pagination > li:last-child > a, .tab-panel form.search .pagination > li:last-child > span {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.tab-panel form.search .pagination > li > a:hover,
+.tab-panel form.search .pagination > li > span:hover,
+.tab-panel form.search .pagination > li > a:focus,
+.tab-panel form.search .pagination > li > span:focus {
+  color: #ffffff;
+  background-color: #80b6ed;
+  border-color: transparent;
+}
+.tab-panel form.search .pagination > .active > a,
+.tab-panel form.search .pagination > .active > span,
+.tab-panel form.search .pagination > .active > a:hover,
+.tab-panel form.search .pagination > .active > span:hover {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #80b6ed;
+  border-color: transparent;
+  cursor: default;
+}
+/*.tab-panel form.search fieldset .pagination > .active > a:focus,
+ .tab-panel form.search fieldset .pagination > .active > span:focus*//*********************************************************************/
+/* STATISTIK */
+.tab-panel .view {
+  overflow: hidden;
+  height: 632px;
+  top: 167px;
+  left: 333px;
+  right: 15px;
+  bottom: 3px;
+  position: absolute;
+  padding: 1px;
+  background: #3f3f3f;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+/* ADMINISTRATION ANFANG */
+/* ADMINISTRATION ENDE */
+.tab-panel .view .pagination {
+  margin-left: 5px;
+  display: inline-block;
+  color: white;
+}
+.tab-panel .view .pagination .first {
+  color: transparent;
+  padding: 4px 4px;
+  background: url("../image/satistik-firstpage.jpg") no-repeat center;
+}
+.tab-panel .view .pagination .prev {
+  color: transparent;
+  padding: 4px 7px;
+  background: url("../image/satistik-previouspage.jpg") no-repeat center;
+}
+.tab-panel .view .pagination .next {
+  color: transparent;
+  padding: 4px 7px;
+  background: url("../image/satistik-nextpage.jpg") no-repeat center;
+}
+.tab-panel .view .pagination .last {
+  color: transparent;
+  padding: 4px 4px;
+  background: url("../image/satistik-lastpage.jpg") no-repeat center;
+}
+.tab-panel .view .pagination span span em {
+  color: white;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+.tab-panel .view .pagination span a, .pagination a {
+  color: #808080;
+  padding: 4px 2px;
+  font-weight: normal;
+  text-decoration: none;
+}
+.tab-panel .view .pagination .goto a:BEFORE {
+  content: "|";
+  margin-right: 6px;
+}
+.ie11 .tab-panel .view table {
+  background: white;
+  /*ie11 row-gap hack! */
+}
+.tab-panel .view .help {
+  padding-top: 300px;
+  text-align: center;
+  vertical-align: center;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 17px;
+  color: #ffffff;
+}
+.tab-panel .view table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+.tab-panel .view table .even td {
+  background: #E8E8E8;
+}
+.tab-panel .view table .odd td {
+  background: #FFFFFF;
+}
+.tab-panel .view table tr.even .level0 {
+  background: rgba(220, 240, 240, 0.8);
+}
+.tab-panel .view table tr.even .level1 {
+  background: rgba(248, 224, 224, 0.8);
+}
+.tab-panel .view table tr.even .level2 {
+  background: rgba(247, 248, 224, 0.8);
+}
+.tab-panel .view table tr.even .level3 {
+  background: rgba(224, 248, 247, 0.8);
+}
+.tab-panel .view table tr.even .level4 {
+  background: rgba(236, 224, 248, 0.8);
+}
+.tab-panel .view table tr.even .levelunknown {
+  background: #fa5882;
+}
+.tab-panel .view table thead {
+  border-bottom: 1px solid #3f3f3f;
+}
+.tab-panel .view table thead, .tab-panel .view table thead th a {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 11px;
+  color: #717171;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tab-panel .view table thead th {
+  background: #F5F6F1;
+  padding: 2px 0px 2px 10px;
+  text-align: left;
+}
+.tab-panel .view table thead th.currency {
+  text-align: right;
+}
+.tab-panel .view table thead th.wicket_orderNone a:hover {
+  color: #282828;
+}
+.tab-panel .view table thead th.wicket_orderUp {
+  background: url(../image/statistik-arrow_up.png) no-repeat 95% 50% #f5f6f1;
+}
+.tab-panel .view table thead th.wicket_orderDown {
+  background: url(../image/statistik-arrow_down.png) no-repeat 95% 50% #f5f6f1;
+}
+.tab-panel .view table thead tr:first-child th:nth-child(2) {
+  border-radius: 0.2em 0 0 0.2em;
+}
+.tab-panel .view table thead tr:first-child th:last-child {
+  border-radius: 0 0.2em 0.2em 0;
+}
+.tab-panel .view table tbody td {
+  text-align: left;
+  padding: 3px 0px 3px 10px;
+  white-space: nowrap;
+}
+.tab-panel .view table tbody td.currency {
+  text-align: right;
+}
+.tab-panel .view table tbody tr:first-child td:nth-child(2) {
+  border-radius: 0.2em 0 0 0;
+}
+.tab-panel .view table tbody tr:first-child td:last-child {
+  border-radius: 0 0.2em 0 0;
+}
+.tab-panel .view table tbody tr:last-child td:nth-child(2) {
+  border-radius: 0 0 0 0.2em;
+}
+.tab-panel .view table tbody tr:last-child td:last-child {
+  border-radius: 0 0 0.2em 0;
+}
+.tab-panel .view .hits {
+  display: inline-block;
+  margin: 14px 5px;
+  color: white;
+}
+.tab-panel .view a.csv, .tab-panel .view a.pdf {
+  display: inline-block;
+  color: #3f3f3f;
+  font-weight: bold;
+  line-height: 19px;
+  text-align: center;
+  width: 38px;
+  height: 19px;
+  margin-left: 5px;
+  background: #d6d6d6;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+  text-decoration: none;
+}
+.tab-panel .view  a.tfpdf {
+  display: inline-block;
+  color: #3f3f3f;
+  font-weight: bold;
+  line-height: 19px;
+  text-align: center;
+  width: 135px;
+  height: 19px;
+  margin-left: 5px;
+  background: #d6d6d6;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+  text-decoration: none;
+}
+.dpvonstat img.ui-datepicker-trigger {
+  position: absolute;
+  top: 251px;
+  left: 310px;
+  cursor: pointer;
+}
+.dpbisstat img.ui-datepicker-trigger {
+  position: absolute;
+  top: 282px;
+  left: 310px;
+  cursor: pointer;
+}
+div.wicket-mask-extra-dark {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  background-color: #2d3439;
+  filter: alpha(opacity=90);
+  /*background: url("../image/login-background.png") left top repeat;*/
+
+}
+/* BENUTZERVERWALTUNG TABLE VIEWRIGHTS ANFANG */
+/* ****************************************** */
+.tab-panel .viewrights {
+  overflow: auto;
+  position: absolute;
+  height: 600px;
+  top: 167px;
+  left: 333px;
+  right: 15px;
+  bottom: 3px;
+  padding: 1px;
+  background: #3f3f3f;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #313A38;
+}
+/* Tabelle Rights, Grundeinstellungen */
+.tab-panel .viewrights .hits {
+  display: inline-block;
+  margin: 14px 5px;
+  color: white;
+}
+.tab-panel .viewrights table.rights {
+  border-spacing: 0;
+}
+.tab-panel .viewrights table.rights .even td {
+  background: #E8E8E8;
+}
+.tab-panel .viewrights table.rights .odd td {
+  background: #FFFFFF;
+}
+.tab-panel .viewrights table.rights th {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 11px;
+  color: #717171;
+}
+.tab-panel .viewrights table.rights th.static {
+  border-right: 2px solid #dddddd;
+  background: #F5F6F1;
+}
+.tab-panel .viewrights table.rights td.rotate {
+  width: 35px;
+  vertical-align: middle;
+  text-align: center;
+  border-left: 2px solid #dddddd;
+}
+.tab-panel .viewrights table.rights th.rotate {
+  height: 100px;
+  vertical-align: bottom;
+}
+/* Farben für Sektionsdaten */
+.tab-panel .viewrights table.rights tr.even .level0 {
+  background: rgba(220, 240, 240, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level1 {
+  background: rgba(248, 224, 224, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level2 {
+  background: rgba(247, 248, 224, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level3 {
+  background: rgba(224, 248, 247, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .level4 {
+  background: rgba(236, 224, 248, 0.8);
+}
+.tab-panel .viewrights table.rights tr.even .levelunknown {
+  background: #fa5882;
+}
+/* Überschriftfarben für die Sektionen */
+.tab-panel .viewrights table.rights th.rotate.level0 > div {
+  background: rgba(220, 240, 240, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level1 > div {
+  background: rgba(248, 224, 224, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level2 > div {
+  background: rgba(247, 248, 224, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level3 > div {
+  background: rgba(224, 248, 247, 0.8);
+}
+.tab-panel .viewrights table.rights th.rotate.level4 > div {
+  background: rgba(236, 224, 248, 0.8);
+}
+/* Rotation, div-Wrapcontainer */
+.tab-panel .viewrights table.rights th.rotate > div {
+  overflow: hidden;
+  border-left: 2px solid #dddddd;
+  background: #F5F6F1;
+  position: relative;
+  top: 0px;
+  left: 50px;
+  height: 100%;
+  width: 35px;
+}
+/* Rotation, div-Wrapcontainer */
+.tab-panel .viewrights table.rights th.rotate > div {
+  overflow: hidden;
+  border-left: 2px solid #dddddd;
+  background: #F5F6F1;
+  position: relative;
+  top: 0px;
+  left: 50px;
+  height: 100%;
+  width: 35px;
+  -ms-transform: skew(-45deg, 0deg);
+  -moz-transform: skew(-45deg, 0deg);
+  -webkit-transform: skew(-45deg, 0deg);
+  -o-transform: skew(-45deg, 0deg);
+  transform: skew(-45deg, 0deg);
+}
+/* Rotation, span-Textcontainer */
+.tab-panel .viewrights table.rights th.rotate span {
+  position: absolute;
+  bottom: 30px;
+  left: -28px;
+  display: inline-block;
+  width: 85px;
+  text-align: left;
+  white-space: nowrap;
+  -ms-transform: skew(45deg, 0deg) rotate(315deg);
+  -moz-transform: skew(45deg, 0deg) rotate(315deg);
+  -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+  -o-transform: skew(45deg, 0deg) rotate(315deg);
+  transform: skew(45deg, 0deg) rotate(315deg);
+}
+.changeLog {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  color: white;
+  float: left;
+  width: 50%;
+  background: url("../image/login-background.png");
+  padding: 0px 5px;
+  margin-left: 130px;
+  border: 1px solid green;
+  text-align: center;
+}
+.changeLog iframe {
+  width: 99%;
+  margin: 0 5px 0 5px;
+  background: #F6F6F4;
+  border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+/* BENUTZERVERWALTUNG TABLE VIEWRIGHTS ENDE */
+/*
+ relative von- bis positionierung
+
+
+.tab-panel form.search fieldset div.dpvonstat input,
+.tab-panel form.search fieldset div.dpbisstat input  {
+
+  border: 0;
+  margin: 0px 0px 1px 0px;
+  width: 125px;
+  background: #E9E9E7;
+
+  text-indent: 9px;
+}
+
+.dpvonstat img.ui-datepicker-trigger, 
+.dpbisstat img.ui-datepicker-trigger {
+  float: right;
+  position: relative;
+  left: -1px;
+  top: 0px;
+  width: 16px;
+  height: 14px;
+  cursor: pointer;
+  padding: 8px 10px 7px 10px;
+  background: #E9E9E7;
+}
+*/

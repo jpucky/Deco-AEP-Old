@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AEP Session abgelaufen</title>
+<link rel="stylesheet" type="text/css" href="css/login.css" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/inet.js"></script>
+
+<style type="text/css">
+<!--
+-->
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        /* IE 10 Hack fuer die Select-Boxen */
+        if ($.browser.msie && $.browser.version < 10) {
+            $("html").addClass("ielt10");
+        }
+        if ($.browser.msie && $.browser.version == 10) {
+            $("html").addClass("ie10");
+        }
+    });
+</script>
+
+<!--[if lte IE 7]>
+        <p>Please upgrade your version of Internet Explorer.</p>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <div class="north">
+            <div class="img-logo"></div>
+            <div class="inet-headliner"></div>
+        </div>
+
+        <div class="pageexpired">Ihre Sitzung wurde beendet !
+        <br>
+        <br>
+           <a href="#" wicket:id="loginURL">Bitte melden Sie sich neu an.</a>
+        </div>
+
+    </div>
+    <!-- wrapper -->
+
+</body>
+</html>

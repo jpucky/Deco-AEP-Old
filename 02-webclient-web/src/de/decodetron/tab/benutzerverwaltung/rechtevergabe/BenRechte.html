@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+            <form action="forms.html" method="post" class="search searchForm1" wicket:id="viewFilter">
+                <fieldset>
+
+                    <div class="switchpanel">
+                        <label><wicket:message key="label.login"/></label> <input type="text" value="" wicket:id="login" />
+                        <label><wicket:message key="label.vorname"/></label> <input type="text" value="" wicket:id="vorname" />
+                        <label><wicket:message key="label.nachname"/></label> <input type="text" value="" wicket:id="nachname" />
+                        <label><wicket:message key="label.Filter"/></label> <input type="text" value="" wicket:id="Filter" />
+                        <label><wicket:message key="label.Gebiet"/></label> <input type="text" value="" wicket:id="Gebiet" />
+                        <label><wicket:message key="label.Vertriebsleitung"/></label> <input type="text" value="" wicket:id="Vertriebsleitung" />
+                    </div>
+                    <input type="submit" value="SUCHE STARTEN" class="search" wicket:id="start-search"/>
+                    <!-- <div class="deletesearch fontheader"><a href="#">Suchbegriffe löschen</a></div> -->
+
+                </fieldset>
+                
+            <table class="changeduser" wicket:id="dummycontainer">
+                <tr>
+                    <th>Geänderte Benutzer</th>
+                    <th>Gruppenbezeichner</th>
+                </tr>
+    
+                <tr wicket:id="changeduserlist">
+                    <td wicket:id="login">[login]</td>
+                    <td wicket:id="groupname">[groupname]</td>
+                </tr>
+            </table>
+                
+            </form>
+           
+           <!-- In diesem Fall sitzt die Liste nicht im Formcontainer! -->
+           <span wicket:id="viewListTable"/>
+
+    </wicket:panel>
+</body>
+</html>
