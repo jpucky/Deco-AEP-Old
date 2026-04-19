@@ -1,0 +1,14 @@
+Den Inhalt einer db in eine Textdatei überführen ...
+
+sqlite3.exe <datenbankname>
+> .headers on
+> .mode csv
+> .output userstat.csv
+> select * from userstatistik;
+> .output stdout
+
+CSV wieder einlesen ...
+sqlite.exe foo
+ create table foo(id,id_user,ip,logintime,logouttime);
+ .mode csv
+ .import userstat.csv foo

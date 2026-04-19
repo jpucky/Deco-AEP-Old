@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+  <display-name>aep</display-name>
+
+  <!-- value in minute -->
+  <session-config>
+    <session-timeout>180</session-timeout>
+  </session-config>
+
+  <filter>
+    <filter-name>wicket.aep</filter-name>
+    <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+
+    <init-param>
+      <param-name>applicationClassName</param-name>
+      <param-value>de.decodetron.AEPApplication</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>configuration</param-name>
+      <param-value>deployment</param-value>
+      <!-- <param-value>deployment</param-value> <param-value>deployment</param-value> -->
+    </init-param>
+
+    <init-param>
+      <param-name>listings</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <!-- <init-param> <param-name>ignorePaths</param-name> <param-value>/ui,/themes,/less,/js,/image,/demos,/icons,/css</param-value> 
+      </init-param> -->
+  </filter>
+
+  <filter-mapping>
+    <filter-name>wicket.aep</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Servlet-Testkram -->
+  <servlet>
+    <servlet-name>HelloWorldServlet</servlet-name>
+    <servlet-class>de.decodetron.servlet.HelloWorldServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HelloWorldServlet</servlet-name>
+    <url-pattern>/HelloWorldServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Servlet-Testkram 
+  <servlet>
+    <servlet-name>DocDownload</servlet-name>
+    <servlet-class>de.decodetron.security.DocDownload</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DocDownload</servlet-name>
+    <url-pattern>/dl</url-pattern>
+  </servlet-mapping>
+  -->
+
+  <!-- Frank-Testabruf Start -->
+  <servlet>
+    <servlet-name>CheckAEPServer</servlet-name>
+    <servlet-class>de.decodetron.servlet.CheckAEPServer</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CheckAEPServer</servlet-name>
+    <url-pattern>/ServerGuardTest</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Frank-Testabruf Ende -->
+
+
+  <!-- Redirect auf Https    -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>AEP</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint> 
+
+  <!-- <listener> <listener-class>de.decodetron.security.SessionCounterListener</listener-class> </listener> -->
+  <!-- <listener> <listener-class>de.decodetron.security.LoginSession</listener-class> </listener> -->
+
+  <!-- Ein Verzeichnis Blockieren <security-constraint> <web-resource-collection> <web-resource-name>Forbidden</web-resource-name> 
+    <url-pattern>/pdf/*</url-pattern> </web-resource-collection> <auth-constraint/> </security-constraint> -->
+
+  <!-- Redirect auf Https , Aufruf unter Tomcat: http://localhost.inetarchiv.de:8080/aep/ , hosts: localhost localhost.inetarchiv.de 
+    <security-constraint> <web-resource-collection> <web-resource-name>AEP</web-resource-name> <url-pattern>/*</url-pattern> 
+    </web-resource-collection> <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint> 
+    </security-constraint> -->
+
+</web-app>
