@@ -61,7 +61,8 @@ import de.decodetron.dao.luecken.LueckeSRDAOI;
 import de.decodetron.dao.recherche.RechercheDAOI;
 import de.decodetron.dao.recherche.RechercheScanDAOI;
 import de.decodetron.dao.statistik.StatistikDAOI;
-import de.decodetron.dao.statistik.club.DAOIClub;
+import de.decodetron.dao.statistik.clubabv.DAOIClubAb;
+import de.decodetron.dao.statistik.clubbes.DAOIClubBes;
 import de.decodetron.dao.statistik.defekte.DAODefekte;
 import de.decodetron.dao.statistikuser.StatistikUserDAOI;
 import de.decodetron.dao.user.UserDAOI;
@@ -360,9 +361,9 @@ public class AEPApplication extends WebApplication {
     }
 
     // Recherche-Club-Extrawurst
-    public DAOIClub getDBClubAbverkauf() {
+    public DAOIClubAb getDBClubAbverkauf() {
         String clubdbLocation = getModel().getFileClubDBAbverkauf();
-        DAOIClub clubDB = DAOFactoryJDBC.getInstance(clubdbLocation).getDAOClub();
+        DAOIClubAb clubDB = DAOFactoryJDBC.getInstance(clubdbLocation).getDAOClub();
         return clubDB;
     }
 
@@ -373,10 +374,10 @@ public class AEPApplication extends WebApplication {
         return defekteDBFilter;
     }
 
-    // Recherche-generisch
-    public StatistikDAOI getDBClubBestand() {
+    // Recherche-ClubBestand-Extrawurst
+    public DAOIClubBes getDBClubBestand() {
         String clubdbBestand = getModel().getFileClubDBBestand();
-        StatistikDAOI clubDBBest = DAOFactoryJDBC.getInstance(clubdbBestand).getDAOFilter();
+        DAOIClubBes clubDBBest = DAOFactoryJDBC.getInstance(clubdbBestand).getDAOClubBes();
         return clubDBBest;
     }
 

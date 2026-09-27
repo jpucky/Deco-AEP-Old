@@ -85,7 +85,7 @@ public class SessionController { // implements HttpSessionListener {
 
         showSessionStore();
     }
-
+    
     public static List<String> getKeyList() {
         return new ArrayList<String>(loggedUser.keySet());
     }
@@ -121,4 +121,5 @@ public class SessionController { // implements HttpSessionListener {
         }
         log.debug("####################################################");
     }
+
 }

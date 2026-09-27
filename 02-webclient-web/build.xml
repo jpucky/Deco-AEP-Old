@@ -11,7 +11,7 @@
 	<property name="war.file" value="${dist.dir}/aep.war" />
 	<property name="prod.files" value="prod-scripte" />
 
-	<target name="buildAll" depends="clean, init, compile, prepare-config, war" />
+	<target name="buildAll" depends="clean, init, build-db-module, compile, prepare-config, war" />
 
 	<!-- Clean -->
 	<target name="clean">
@@ -40,15 +40,14 @@
 				<include name="**/*.html" />
 				<include name="**/*.properties" />
 			</fileset>
-			<!-- überschreiben !!! -->
-			<fileset dir="${prod.files}">
-				<include name="**/*.properties" />
-			</fileset>
 			<fileset dir="${res.dir}">
 				<include name="**/*.xsl" />
 				<include name="**/*.pdf" />
+				<include name="db.properties" />
+				<include name="log4j.properties" />
 			</fileset>
 		</copy>
+		<copy file="${res.dir}/conf.prod.properties" tofile="${classes.dir}/conf.properties" />
 	</target>
 
 	<target name="war">
@@ -66,6 +65,10 @@
 			<lib file="../01-dbmodul/dist/db-module.jar" />
 
 		</war>
+	</target>
+	
+	<target name="build-db-module">
+	    <ant dir="../01-dbmodul" target="jar" inheritall="false" />
 	</target>
 
 	<path id="project.classpath">

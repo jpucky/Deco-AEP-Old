@@ -59,7 +59,7 @@ import de.decodetron.bo.DataRecord;
 import de.decodetron.bo.FilterItemList;
 import de.decodetron.bo.LimitInfo;
 import de.decodetron.bo.SortInfo;
-import de.decodetron.dao.statistik.StatistikDAOI;
+import de.decodetron.dao.statistik.clubbes.DAOIClubBes;
 import de.decodetron.data.Util;
 import de.decodetron.security.LoginSession;
 import de.decodetron.tab.statistik.TxtFilter;
@@ -77,7 +77,7 @@ public class BestandDataProvider extends SortableDataProvider {
         setSort("1", SortOrder.DESCENDING);
     }
 
-    protected StatistikDAOI getContactsDB() {
+    protected DAOIClubBes getContactsDB() {
         return AEPApplication.get().getDBClubBestand();
     }
 
@@ -122,7 +122,7 @@ public class BestandDataProvider extends SortableDataProvider {
         List<String> filterList = LoginSession.get().getUser().getAllFilter();
 
         Long cnt = 0L;
-        cnt = getContactsDB().countStatistikData(Const.TABLENAME_BESTAND, colName, filterList, fList);
+        cnt = getContactsDB().countClubBestandData(Const.TABLENAME_BESTAND, colName, filterList, fList);
         // Ist nötig wenn cnt == 0, da der Iterator nicht aktualisiert!
         map.put(Const.KEYHITSPERPAGE, cnt);
         map.put(Const.KEYSHOWPERPAGE, cnt);
@@ -142,7 +142,7 @@ public class BestandDataProvider extends SortableDataProvider {
         List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
         FilterItemList fList = Util.mapSearchFields(listTxtFields);
 
-        List<DataRecord> list = getContactsDB().getStatistikData(//
+        List<DataRecord> list = getContactsDB().getClubBestandData(//
             Const.TABLENAME_BESTAND,//
             colName,//
             filterList,//

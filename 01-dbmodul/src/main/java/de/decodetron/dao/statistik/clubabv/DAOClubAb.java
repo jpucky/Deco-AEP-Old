@@ -13,7 +13,7 @@
 //
 //
 
-package de.decodetron.dao.statistik.club;
+package de.decodetron.dao.statistik.clubabv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +30,12 @@ import de.decodetron.util.Util;
  * @author Thomas Winter
  * @since 20.07.2015
  */
-public class DAOClub extends StatistikDAO implements DAOIClub {
+public class DAOClubAb extends StatistikDAO implements DAOIClubAb {
 
     private final static String AEP_BETRAG = "Orig_AEP_BET";
     private DAOFactoryJDBC daoFactory;
 
-    public DAOClub(DAOFactoryJDBC df) {
+    public DAOClubAb(DAOFactoryJDBC df) {
         super(df);
         this.daoFactory = df;
     }

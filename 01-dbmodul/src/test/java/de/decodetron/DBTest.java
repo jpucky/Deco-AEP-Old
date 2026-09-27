@@ -136,604 +136,290 @@ import de.decodetron.util.SystemUtil;
  */
 public class DBTest extends TestCase {
 
-    final String TABLENAME = "ClubBestand";
-    // final String SCHEMANAME = "ClubBestand.sdb";
-    private DAOFactoryJDBC dbBaseClubBestand = null;
+	final String TABLENAME = "ClubBestand";
+	// final String SCHEMANAME = "ClubBestand.sdb";
+	private DAOFactoryJDBC dbBaseClubBestand = null;
 
-    @Override
-    protected void setUp() throws Exception {
-        SystemUtil u = new SystemUtil();
-        // Funktioniert nicht !?
-        // see: https://bitbucket.org/xerial/sqlite-jdbc/wiki/Usage%20
-        //System.setProperty("sqlite.purejava", "true");
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.clubbestand"));
-        dbBaseClubBestand = DAOFactoryJDBC.getInstance(dbFileC);
-    }
+	@Override
+	protected void setUp() throws Exception {
+		SystemUtil u = new SystemUtil();
+		// Funktioniert nicht !?
+		// see: https://bitbucket.org/xerial/sqlite-jdbc/wiki/Usage%20
+		// System.setProperty("sqlite.purejava", "true");
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.clubbestand"));
+		dbBaseClubBestand = DAOFactoryJDBC.getInstance(dbFileC);
+	}
 
-    /**
-     * Test OHNE DAO-Funktionatlität. Nur um warm zu werden.
-     */
-    public void testGetAllClubBestand1() throws Exception {
+//	public void testIndexLieferantNrExisting() {
+//		
+//		ResultSet resultSet = null;
+//		Connection connection = null;
+//		PreparedStatement preparedStatement = null;
+//		String sql = "SELECT 1 " + "FROM sqlite_master " + "WHERE type = 'index' " + "AND name = ? " + "LIMIT 1";
+//		
+//		try {
+//			SystemUtil u = new SystemUtil();
+//			String userHome = System.getProperty("user.dir");
+//			Properties p = new SystemUtil().loadSystemProperties("db.properties");
+//			String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.clubbestand"));
+//			dbBaseClubBestand = DAOFactoryJDBC.getInstance(dbFileC);
+//			connection = dbBaseClubBestand.getConnection();
+//			preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setString(1, "idxTagesDatum");
+//			resultSet = preparedStatement.executeQuery();
+//			//connection.setAutoCommit(true);
+//			assertTrue(resultSet.next());
+//			
+//			connection.close();
+//			preparedStatement.close();
+//			resultSet.close();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//	}
+	
+	public void testIndexTagesDatumExisting() {
+		
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "SELECT 1 " + "FROM sqlite_master " + "WHERE type = 'index' " + "AND name = ? " + "LIMIT 1";
+		
+		try {
+//			SystemUtil u = new SystemUtil();
+//			String userHome = System.getProperty("user.dir");
+//			Properties p = new SystemUtil().loadSystemProperties("db.properties");
+//			String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.clubbestand"));
+//			dbBaseClubBestand = DAOFactoryJDBC.getInstance(dbFileC);
+			connection = dbBaseClubBestand.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, "idxTagesDatum");
+			resultSet = preparedStatement.executeQuery();
+			//connection.setAutoCommit(true);
+			assertTrue(resultSet.next());
+			
+//			connection.close();
+//			preparedStatement.close();
+//			resultSet.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 
-        Connection con = dbBaseClubBestand.getConnection();
-        PreparedStatement prep = con.prepareStatement("SELECT * FROM ClubBestand");
-        ResultSet rs = prep.executeQuery();
+	// /**
+	// * Test MIT DAO-Funktionatlität.
+	// */
+	// public void testGetAllRecordsFromDbXY() {
+	// DAOI d = dbBaseClubBestand.getDAO();
+	// List<DataRecord> dr = d.getAllRecords("Bestand");
+	// assertTrue(dr.size() >= 4);
+	// }
+	//
+	// public void testMultiFilterFunction() {
+	// DAOI daoi = dbBaseClubBestand.getDAO();
+	// List<DataRecord> l = daoi.getAllRecordsFilterBy("Bestand", "", "", "", "", "", "20", "", "");
+	// assertTrue(l.size() == 5);
+	// }
+	//
+	// public void testMultiFilterFunctionNullValues() {
+	// DAOI daoi = dbBaseClubBestand.getDAO();
+	// List<DataRecord> l = daoi.getAllRecordsFilterBy("Bestand", null, null, null, null, null, null, null, null);
+	// // Es darf nicht 0 sein. Der Rest ist egal.
+	// assertTrue(l.size() > 5);
+	// }
 
-        // Auch ne Möglichkeit !
-        // Statement stat = con.createStatement();
-        // ResultSet rs = stat.executeQuery("SELECT * FROM ClubBestand");
+	/**
+	 * Filter können sein: '*', '123', null?
+	 */
+	public void testSectionSplit() {
+		String toSplit = "*";
+		String regExSplit1 = "\\,"; // [*]
+		String[] split1a = toSplit.split(regExSplit1);
+		assertTrue(split1a.length == 1);
 
-        int cnt = 0;
-        while (rs.next()) {
-            ++cnt;
-            // String datum = rs.getString("Datum");
-            // String posTyp = rs.getString("PosTyp");
-            // System.out.println("PosTyp: " + posTyp);
-        }
+		toSplit = "1, 2";
+		split1a = toSplit.split(regExSplit1);
+		assertTrue(split1a.length == 2);
 
-        assertTrue(cnt > 0);
+		toSplit = "1,2";
+		split1a = toSplit.split(regExSplit1);
+		assertTrue(split1a.length == 2);
+	}
 
-        prep.close();
-        con.close();
-    }
+	// /**
+	// * Es werden mehr Filterbezeichner mitgeliefert, als die Tabelle Spalten hat:<br>
+	// * filterValues.length > colNames.size()<br>
+	// * Tabelle ClubBestand: 8 Spalten.
+	// */
+	// public void testMOREFilterThanColumns() {
+	// DAOI daoi = dbBaseClubBestand.getDAO();
+	// List<DataRecord> l = daoi.getAllRecordsFilterBy("ClubBestand", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+	// DataRecord r = l.get(0);
+	// // Vorerst! Weiss noch nicht wie ich drauf Reagieren soll
+	// assertTrue(r.getColItem(0).startsWith("Mehr Filter als "));
+	// }
 
-    // /**
-    // * Test MIT DAO-Funktionatlität.
-    // */
-    // public void testGetAllClubBestand2() {
-    // ClubBestandDAOI cb = dbBaseClubBestand.getClubBestandDAO();
-    // List<ClubBestand> cbl = cb.getAllClubBestand();
-    // assertTrue(cbl.size() >= 4);
-    // }
+	public void testClub_ABVERKAUF_20131106() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
+		DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
+		DAOI dao = dbClub20131106.getDAO();
+		List<DataRecord> dr = dao.getAllRecords("ABVERKAUF");
 
-    /**
-     * Test MIT DAO-Funktionatlität.
-     */
-    public void testGetAllRecordsFromDbXY() {
-        DAOI d = dbBaseClubBestand.getDAO();
-        List<DataRecord> dr = d.getAllRecords("ClubBestand");
-        assertTrue(dr.size() >= 4);
-    }
+		// Nix. Einfach nur mal gucken, ob überhaupt was rauskommt.
+		assertTrue(dr.size() > 0);
+	}
 
-    // public void testFilterClubBestandCheckNull() {
-    // ClubBestandDAOI cb = dbBaseClubBestand.getClubBestandDAO();
-    // List<ClubBestand> cbl = cb.getClubBestandFilterBy(null, null, null, null, null, null, null,
-    // null);
-    // assertTrue(cbl.size() >= 9);
-    //
-    // cbl = cb.getClubBestandFilterBy(null, null, null, null, null, "20", null, null);
-    // assertTrue(cbl.size() == 5);
-    // }
-    //
-    // public void testFilterClubBestandCheckEmptyString() {
-    // ClubBestandDAOI cb = dbBaseClubBestand.getClubBestandDAO();
-    // List<ClubBestand> cbl = cb.getClubBestandFilterBy("", "", "", "", "", "", "", "");
-    // assertTrue(cbl.size() >= 9);
-    //
-    // cbl = cb.getClubBestandFilterBy("", "", "", "", "", "20", "", "");
-    // assertTrue(cbl.size() == 5);
-    // }
-    //
-    // /**
-    // * Suche nach pzn %20%. Diese gibt es jedoch nicht.
-    // */
-    // public void testFilterClubBestandCheckValueNotExisting() {
-    // ClubBestandDAOI cb = dbBaseClubBestand.getClubBestandDAO();
-    // List<ClubBestand> cbl = cb.getClubBestandFilterBy("", "", "", "", "20", "", "", "");
-    // assertTrue(cbl.size() == 0);
-    // }
+	public void testClub_BESTAND_20131106() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
+		DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
+		DAOI dao = dbClub20131106.getDAO();
+		List<DataRecord> dr = dao.getAllRecords("BESTAND");
 
-    public void testMultiFilterFunction() {
-        DAOI daoi = dbBaseClubBestand.getDAO();
-        List<DataRecord> l = daoi.getAllRecordsFilterBy("ClubBestand", "", "", "", "", "", "20", "", "");
-        assertTrue(l.size() == 5);
-    }
+		// Nix. Einfach nur mal gucken ob überhaupt was rauskommt.
+		assertTrue(dr.size() > 5000);
+	}
 
-    public void testMultiFilterFunctionNullValues() {
-        DAOI daoi = dbBaseClubBestand.getDAO();
-        List<DataRecord> l = daoi.getAllRecordsFilterBy("ClubBestand", null, null, null, null, null, null, null, null);
-        // Es darf nicht 0 sein. Der Rest ist egal.
-        assertTrue(l.size() > 5);
-    }
+	public void testClub_BESTAND_20131106_MultiFilterFunction() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
+		DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
+		DAOI dao = dbClub20131106.getDAO();
+		List<DataRecord> dr = dao.getAllRecordsFilterBy("BESTAND", "", "", "", "", "", "", "", "", "");
 
-    /**
-     * Filter können sein: '*', '123', null?
-     */
-    public void testSectionSplit() {
-        String toSplit = "*";
-        String regExSplit1 = "\\,"; // [*]
-        String[] split1a = toSplit.split(regExSplit1);
-        assertTrue(split1a.length == 1);
+		// Nix. Einfach nur mal gucken ob überhaupt was rauskommt.
+		assertTrue(dr.size() > 5000);
+	}
 
-        toSplit = "1, 2";
-        split1a = toSplit.split(regExSplit1);
-        assertTrue(split1a.length == 2);
+	public void testClub_BESTAND_20131106_MultiFilterFunction1() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
+		DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
+		DAOI dao = dbClub20131106.getDAO();
+		List<DataRecord> dr = dao.getAllRecordsFilterBy("BESTAND", "", "", "", "", "", "", "", "TOLTERODIN", "", "");
 
-        toSplit = "1,2";
-        split1a = toSplit.split(regExSplit1);
-        assertTrue(split1a.length == 2);
-    }
+		assertTrue(dr.size() == 1);
+	}
 
-    /**
-     * Es werden mehr Filterbezeichner mitgeliefert, als die Tabelle Spalten hat:<br>
-     * filterValues.length > colNames.size()<br>
-     * Tabelle ClubBestand: 8 Spalten.
-     */
-    public void testMOREFilterThanColumns() {
-        DAOI daoi = dbBaseClubBestand.getDAO();
-        List<DataRecord> l = daoi.getAllRecordsFilterBy("ClubBestand", "1", "2", "3", "4", "5", "6", "7", "8", "9");
-        DataRecord r = l.get(0);
-        // Vorerst! Weiss noch nicht wie ich drauf Reagieren soll
-        assertTrue(r.getColItem(0).startsWith("Mehr Filter als "));
-    }
+	public void test_Reimport_MultiFilterFunction1() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
+		DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
+		DAOI dao = dbReimport.getDAO();
+		List<DataRecord> dr = dao.getAllRecordsFilterBy("REIMP", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+				"", "");
 
-    /**
-     * Es werden weniger Filterbezeichner mitgeliefert, als die Tabelle Spalten hat:<br>
-     * colNames.size() > filterValues.length
-     */
-    public void testLESSFilterThanColumns() {
-        DAOI daoi = dbBaseClubBestand.getDAO();
-        List<DataRecord> l = daoi.getAllRecordsFilterBy("ClubBestand", "1", "2");
-        // Nix. Es tritt keine Exception auf. Die Abfrage bezieht sich einfach nicht auf alle
-        // Filter!
-    }
+		assertTrue(dr.size() == 789);
+	}
 
-    public void testClub_ABVERKAUF_20131106() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-        DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-        DAOI dao = dbClub20131106.getDAO();
-        List<DataRecord> dr = dao.getAllRecords("ABVERKAUF");
+	public void test_Reimport_MultiFilterFunction2() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
+		DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
+		DAOI dao = dbReimport.getDAO();
+		List<DataRecord> dr = dao.getAllRecordsFilterBy("REIMP", "", "", "", "", "0061303", "", "", "", "", "", "", "",
+				"", "", "", "");
 
-        // Nix. Einfach nur mal gucken, ob überhaupt was rauskommt.
-        assertTrue(dr.size() > 0);
-    }
+		assertTrue(dr.size() == 2);
+	}
 
-    public void testClub_BESTAND_20131106() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-        DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-        DAOI dao = dbClub20131106.getDAO();
-        List<DataRecord> dr = dao.getAllRecords("BESTAND");
+	public void testLimit1() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
+		DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
+		DAOI dao = dbReimport.getDAO();
+		List<DataRecord> dr = dao.getAllRecordsLimited("REIMP", "Menge", "desc", 5, 5);
 
-        // Nix. Einfach nur mal gucken ob überhaupt was rauskommt.
-        assertTrue(dr.size() > 5000);
-    }
+		assertEquals(dr.size(), 5 + 1); // +1 wg. spaltenüberschrift!
+		assertTrue(((DataRecord) dr.get(3)).getColItem(10).equals("6"));
+		assertTrue(((DataRecord) dr.get(4)).getColItem(10).equals("5"));
+	}
 
-    public void testClub_BESTAND_20131106_MultiFilterFunction() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-        DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-        DAOI dao = dbClub20131106.getDAO();
-        List<DataRecord> dr = dao.getAllRecordsFilterBy("BESTAND", "", "", "", "", "", "", "", "", "");
+	public void testChargenUmlautReplacement1() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
+		DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
+		DAOI dao = dbChargen.getDAO();
+		List<String> colNames = dao.getColumNames("CHARGEN");
 
-        // Nix. Einfach nur mal gucken ob überhaupt was rauskommt.
-        assertTrue(dr.size() > 5000);
-    }
+		assertEquals("Strasse", DAOUtil.replaceUmlaute(colNames.get(15)));
+	}
 
-    public void testClub_BESTAND_20131106_MultiFilterFunction1() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-        DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-        DAOI dao = dbClub20131106.getDAO();
-        List<DataRecord> dr = dao.getAllRecordsFilterBy("BESTAND", "", "", "", "", "", "", "", "TOLTERODIN", "", "");
+	public void testChargenGetColumnTypes() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
+		DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
+		DAOI dao = dbChargen.getDAO();
+		List<String> columnTypes = dao.getColumTypes("CHARGEN");
 
-        assertTrue(dr.size() == 1);
-    }
+		System.out.println(columnTypes);
+	}
 
-    public void test_Reimport_MultiFilterFunction1() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
-        DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
-        DAOI dao = dbReimport.getDAO();
-        List<DataRecord> dr = dao.getAllRecordsFilterBy("REIMP", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "");
+	public void testGetColumNamesDefekte() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.defekte"));
+		DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
+		DAOI dao = dbChargen.getDAO();
+		List<String> colNames = dao.getColumNames("DEFEKTE");
+		assertTrue(colNames.size() == 14);
+	}
 
-        assertTrue(dr.size() == 789);
-    }
+	public void testChargenUmlautReplacement2() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
+		DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
+		DAOI dao = dbChargen.getDAO();
+		List<DataRecord> colNames = dao.getAllRecords("CHARGEN");
+		DataRecord colName = colNames.get(0);
 
-    public void test_Reimport_MultiFilterFunction2() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
-        DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
-        DAOI dao = dbReimport.getDAO();
-        List<DataRecord> dr = dao.getAllRecordsFilterBy("REIMP", "", "", "", "", "0061303", "", "", "", "", "", "", "",
-            "", "", "", "");
+		assertEquals("Strasse", DAOUtil.replaceUmlaute(colName.getColItem(15)));
+	}
 
-        assertTrue(dr.size() == 2);
-    }
+	public void testCountAllBtmRecords() {
+		SystemUtil u = new SystemUtil();
+		String userHome = System.getProperty("user.dir");
+		Properties p = new SystemUtil().loadSystemProperties("db.properties");
+		String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
+		DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
+		DAOI dao = dbBtm.getDAO();
+		Long rec = dao.countAllRecords("btm");
+		assertTrue(rec >= 572);
+	}
 
-    public void testLimit1() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileR = u.getHomeDirectory(userHome, p.getProperty("file.db.reimporte"));
-        DAOFactoryJDBC dbReimport = DAOFactoryJDBC.getInstance(dbFileR);
-        DAOI dao = dbReimport.getDAO();
-        List<DataRecord> dr = dao.getAllRecordsLimited("REIMP", "Menge", "desc", 5, 5);
+	public void testRunningMode() {
+		try {
+			System.out.println(
+					String.format("running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native" : "pure-java"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-        assertEquals(dr.size(), 5 + 1); // +1 wg. spaltenüberschrift!
-        assertTrue(((DataRecord) dr.get(3)).getColItem(10).equals("6"));
-        assertTrue(((DataRecord) dr.get(4)).getColItem(10).equals("5"));
-    }
-
-    public void testChargenUmlautReplacement1() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
-        DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
-        DAOI dao = dbChargen.getDAO();
-        List<String> colNames = dao.getColumNames("CHARGEN");
-
-        assertEquals("Strasse", DAOUtil.replaceUmlaute(colNames.get(15)));
-    }
-
-    public void testChargenGetColumnTypes() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
-        DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
-        DAOI dao = dbChargen.getDAO();
-        List<String> columnTypes = dao.getColumTypes("CHARGEN");
-
-        System.out.println(columnTypes);
-    }
-
-    public void testGetColumNamesDefekte() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.defekte"));
-        DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
-        DAOI dao = dbChargen.getDAO();
-        List<String> colNames = dao.getColumNames("DEFEKTE");
-        assertTrue(colNames.size() == 14);
-    }
-
-    public void testChargenUmlautReplacement2() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileChargen = u.getHomeDirectory(userHome, p.getProperty("file.db.chargen"));
-        DAOFactoryJDBC dbChargen = DAOFactoryJDBC.getInstance(dbFileChargen);
-        DAOI dao = dbChargen.getDAO();
-        List<DataRecord> colNames = dao.getAllRecords("CHARGEN");
-        DataRecord colName = colNames.get(0);
-
-        assertEquals("Strasse", DAOUtil.replaceUmlaute(colName.getColItem(15)));
-    }
-
-    // /**
-    // * Simuliert das Laden z.B der CLUB-Abverkaufliste mit eingeschränkten Rechten.
-    // */
-    // @Deprecated
-    // public void testGetAllRecordsByColNameByColItemLieferantNr() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-    // DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-    // DAOI dao = dbClub20131106.getDAO();
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("ABVERKAUF", "LieferantNr",
-    // "11950");
-    // // assertTrue(list.size() == 2);
-    // assertTrue(list.size() == 1); // spaltenueberschrift faellt weg.
-    // }
-
-    // @Deprecated
-    // public void testGetAllRecordsByColNameByColItemWildcard() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-    // DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-    // DAOI dao = dbClub20131106.getDAO();
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("ABVERKAUF", "LieferantNr", "*");
-    // assertTrue(list.size() == 20);
-    // }
-
-    // /**
-    // * Simuliert das Laden z.B der CLUB-Abverkaufliste mit eingeschränkten Rechten.
-    // */
-    // @Deprecated
-    // public void testGetAllRecordsByColNameByColItem2() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-    // DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-    // DAOI dao = dbClub20131106.getDAO();
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("ABVERKAUF", "LieferantNr",
-    // "20792", "", "", "");
-    // assertTrue(list.size() == 7);
-    // }
-    //
-    // /**
-    // * Simuliert das Laden z.B der CLUB-Abverkaufliste mit eingeschränkten Rechten.
-    // */
-    // @Deprecated
-    // public void testGetAllRecordsByColNameByColItem3() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileC = u.getHomeDirectory(userHome, p.getProperty("file.db.club20131106"));
-    // DAOFactoryJDBC dbClub20131106 = DAOFactoryJDBC.getInstance(dbFileC);
-    // DAOI dao = dbClub20131106.getDAO();
-    // // Test: zusatzfilteratribute weglassen.
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("ABVERKAUF", "LieferantNr",
-    // "20792");
-    // assertTrue(list.size() == 7);
-    // }
-
-    // /**
-    // * Testet das Abholen der Daten von Nutzern mit mehrfach-Filtern. Konkret wird diese Abfrage
-    // * getestet. Sie liefert 2 Datensätze:
-    // *
-    // * <pre>
-    // * select * from btm a
-    // * where(a.KundenNr like '3154778'
-    // * or a.KundenNr like '4425050'
-    // * or a.KundenNr like '0069687')
-    // * and (a.PicklistenNr like '%1000000807%' or c.PicklistenNr is null )
-    // * and (a.LieferantNr like '%25137%' or c.LieferantNr is null);
-    // * </pre>
-    // */
-    // public void testGetAllRecordsMultiFilterUser() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // DAOI dao = dbBtm.getDAO();
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("btm", "KundenNr",
-    // Arrays.asList("3154778", "4425050", "0069687"), "", "", "", "", "", "", "", "1000000807", "",
-    // "", "", "",
-    // "", "25137");
-    // assertTrue(list.size() == 2);
-    // }
-
-    // /**
-    // * Testet das Abholen der Daten mit Wildcards. Wildcard wird ersetzt durch '%'<br>
-    // *
-    // * <pre>
-    // * select * from btm c
-    // * where (
-    // * c.KundenNr like '%%'
-    // * )
-    // * and (c.PicklistenNr like '%1000000807%' or c.RecId is null)
-    // * and (c.LieferantNr like '%25137%' or c.AuftragDatum is null);
-    // * </pre>
-    // */
-    // public void testGetAllRecordsMultiFilterUserWildcard() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // DAOI dao = dbBtm.getDAO();
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItem("btm", "KundenNr",
-    // Arrays.asList("*"), "", "", "",
-    // "", "", "", "", "1000000807", "", "", "", "", "", "25137");
-    // assertTrue(list.size() == 2);
-    // }
-
-    public void testCountAllBtmRecords() {
-        SystemUtil u = new SystemUtil();
-        String userHome = System.getProperty("user.dir");
-        Properties p = new SystemUtil().loadSystemProperties("db.properties");
-        String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-        DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-        DAOI dao = dbBtm.getDAO();
-        Long rec = dao.countAllRecords("btm");
-        assertTrue(rec >= 572);
-    }
-
-    public void testRunningMode() {
-        try {
-            System.out.println(String.format("running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native"
-                    : "pure-java"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // /**
-    // * <pre>
-    // * select * from btm a
-    // * where(a.KundenNr like '3054172'
-    // * or a.KundenNr like '4425050'
-    // * or a.KundenNr like '0069687')
-    // * --and a.PicklistenNr like '%1000000807%'
-    // * --and a.LieferantNr like '%25137%'
-    // * order by a.Artikelbezeichnung asc limit 4 offset 0;
-    // * </pre>
-    // */
-    // public void testGetAllRecordsMultiFilterLimit1() {
-    //
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // DAOI dao = dbBtm.getDAO();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItemLimit("btm", "KundenNr",
-    // Arrays.asList("3054172", "4425050", "0069687"), new Integer(9), "asc", new Integer(4), new
-    // Long(0));
-    // assertTrue(list.size() == 4);
-    // }
-    //
-    // /**
-    // * Sollte einer der Limitierungsparameter null sein, wird eine Defaultmenge von 1000
-    // datensätzen
-    // * ausgegeben.
-    // */
-    // public void testGetAllRecordsMultiFilterLimitLimitNull() {
-    //
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // DAOI dao = dbBtm.getDAO();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItemLimit("btm", "KundenNr",
-    // Arrays.asList("3054172", "4425050", "0069687"), null, "asc", new Integer(4), new Long(0));
-    // assertTrue(list.size() >= 15);
-    // }
-
-    // public void testGetAllRecordsMultiFilterLimitPicListNr7() {
-    //
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // DAOI dao = dbBtm.getDAO();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getAllRecordsByColNameByColItemLimit("btm", "KundenNr",
-    // Arrays.asList("3054172", "4425050", "0069687"), new Integer(9), "asc", new Integer(4), new
-    // Long(0), "", "",
-    // "", "", "", "", "", "1000000807");
-    // assertTrue(list.size() == 3);
-    // }
-
-    // TODO: Diese Tests erneuern !!!
-
-    // public void testGetAllRecordsMultiFilterLimitFromToDate() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // StatistikDAOI dao = dbBtm.getDAOFilter();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getStatistikData("btm", "KundenNr",
-    // Arrays.asList("*"), new Integer(9), "asc", new Integer(100), new Long(0), "", "2013-11-05",
-    // "2013-11-07",
-    // "44", // KundenNr
-    // "", "", "", "", "TILI", "", "", "", "", "", "" // Chargennummer
-    // );
-    // assertTrue(list.size() == 3);
-    // }
-    //
-    // public void testGetAllRecordsMultiFilterLimitFromToDateNOTODATE() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // StatistikDAOI dao = dbBtm.getDAOFilter();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getStatistikData("btm", "KundenNr",
-    // Arrays.asList("*"), new Integer(9), "asc", new Integer(100), new Long(0), "", "2013-11-06",
-    // // VON
-    // "", // BIS
-    // "44", // KundenNr
-    // "", "", "", "", "", "", "", "", "", "", "" // Chargennummer
-    // );
-    // assertTrue(list.size() == 76);
-    // }
-    //
-    // public void testGetAllRecordsMultiFilterLimitFromToDateNOFROMDATE() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // StatistikDAOI dao = dbBtm.getDAOFilter();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getStatistikData("btm", "KundenNr",
-    // Arrays.asList("*"), new Integer(9), "asc", new Integer(100), new Long(0), "", "", // VON
-    // "2013-10-04", // BIS
-    // "44", // KundenNr
-    // "", "", "", "", "", "", "", "", "", "", "" // Chargennummer
-    // );
-    // assertTrue(list.size() == 16);
-    // }
-    //
-    // public void testGetAllRecordsMultiFilterLimitFromToDateNOFROMNOTODATE() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // StatistikDAOI dao = dbBtm.getDAOFilter();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    // List<DataRecord> list = dao.getStatistikData("btm",// TABELLENNAME
-    // "KundenNr",// FILTERIDENTIFIER
-    // Arrays.asList("*"),// FILTERITEM
-    // new Integer(9),// COL2SORT
-    // "asc",// SORTDIRECTION
-    // new Integer(100),// LIMIT
-    // new Long(0),// OFFSET
-    // "",// RECID
-    // "", // VON
-    // "", // BIS
-    // "449", // KundenNr
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "" // Chargennummer
-    // );
-    // assertTrue(list.size() == 48);
-    // }
-    //
-    // public void testCOUNTAllRecordsMultiFilterLimitFromToDateNOFROMNOTODATE() {
-    // SystemUtil u = new SystemUtil();
-    // String userHome = System.getProperty("user.dir");
-    // Properties p = new SystemUtil().loadSystemProperties("db.properties");
-    // String dbFileBtm = u.getHomeDirectory(userHome, p.getProperty("file.db.btm"));
-    // DAOFactoryJDBC dbBtm = DAOFactoryJDBC.getInstance(dbFileBtm);
-    // StatistikDAOI dao = dbBtm.getDAOFilter();
-    // // "btm", "KundenNr", Arrays.asList("3154778", "4425050", "0069687"), 9, "asc", 4, 0
-    //
-    // long cnt = dao.countStatistikData("btm",// TABELLENNAME
-    // "KundenNr",// FILTERIDENTIFIER
-    // Arrays.asList("*"),// FILTERITEM
-    // // new Integer(9),// COL2SORT
-    // // "asc",// SORTDIRECTION
-    // // new Integer(100),// LIMIT
-    // // new Long(0),// OFFSET
-    // "",// RECID
-    // "", // VON
-    // "", // BIS
-    // "449", // KundenNr
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "",//
-    // "" // Chargennummer
-    // );
-    // assertTrue(cnt == 48);
-    // }
 }

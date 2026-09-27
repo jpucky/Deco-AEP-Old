@@ -595,5 +595,17 @@ public class DAO extends DAOBase implements DAOI {
 
         return val;
     }
+    
+    
+    public String getStringArrayItems(String[] s){    	
+    	StringBuilder sb = new StringBuilder();
+    	if(s != null){
+        	for (int i = 0; i < s.length; i++) {
+    			sb.append(s[i] + ", ");
+    		}
+        	sb.delete(sb.toString().length() - 2, sb.toString().length()); 
+    	}
+    	return sb.toString();
+    }
 
 }

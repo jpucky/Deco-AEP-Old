@@ -112,8 +112,10 @@ import de.decodetron.dao.history.HistoryBrDAO;
 import de.decodetron.dao.history.HistoryBrDAOI;
 import de.decodetron.dao.statistik.StatistikDAO;
 import de.decodetron.dao.statistik.StatistikDAOI;
-import de.decodetron.dao.statistik.club.DAOClub;
-import de.decodetron.dao.statistik.club.DAOIClub;
+import de.decodetron.dao.statistik.clubabv.DAOClubAb;
+import de.decodetron.dao.statistik.clubabv.DAOIClubAb;
+import de.decodetron.dao.statistik.clubbes.DAOClubBes;
+import de.decodetron.dao.statistik.clubbes.DAOIClubBes;
 import de.decodetron.dao.statistik.defekte.DAODefekte;
 import de.decodetron.dao.statistikuser.StatistikUserDAO;
 import de.decodetron.dao.statistikuser.StatistikUserDAOI;
@@ -186,14 +188,18 @@ public abstract class DAOFactoryJDBC {
         return new StatistikDAO(this);
     }
 
-    public DAOIClub getDAOClub() {
-        return new DAOClub(this);
+    public DAOIClubAb getDAOClub() {
+        return new DAOClubAb(this);
     }
 
     public DAODefekte getDAODefekte() {
         return new DAODefekte(this);
     }
 
+    public DAOIClubBes getDAOClubBes() {
+    	return new DAOClubBes(this);
+    }
+    
     public HistoryBrDAOI getDAOHistoryBr() {
         return new HistoryBrDAO(this);
     }

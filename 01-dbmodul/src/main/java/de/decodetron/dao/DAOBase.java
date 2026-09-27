@@ -92,8 +92,8 @@ import de.decodetron.util.SystemUtil;
  */
 public class DAOBase {
 
-    private static Logger log = Logger.getLogger(DAOBase.class);
-    private static Logger logDB = Logger.getLogger("LOGFILE");
+    //private static Logger log = Logger.getLogger(DAOBase.class);
+    // private static Logger logDB = Logger.getLogger("LOGFILE");
     private static DecimalFormat dc = new DecimalFormat("###,###,###.00");
     public final static NumberFormat NF_MONEY = NumberFormat.getCurrencyInstance();
 
@@ -186,7 +186,7 @@ public class DAOBase {
         ResultSet resultSet = null;
         List<DataRecord> cBest = new ArrayList<DataRecord>();
 
-        log.debug(sql);
+        //log.debug(sql);
 
         try {
             connection = daoFactory.getConnection();
@@ -247,29 +247,29 @@ public class DAOBase {
      */
     public List<DataRecord> executeSQLStatement4PS(PreparedStatementO ps, DAOFactoryJDBC daoFactory) {
 
+    	long startTime = 0;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<DataRecord> cBest = new ArrayList<DataRecord>();
 
-        log.debug(ps.getSql());
+        //log.debug(ps.getSql());
 
         try {
-            logDB.debug("SQL: " + ps.getSql());
-            logDB.debug("VAL: " + ps.toString());
-            
+        	startTime = System.currentTimeMillis(); 
             connection = daoFactory.getConnection();
             preparedStatement = prepareStatement(connection, ps.getSql(), false, (Object[]) ps.getValues());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 cBest.add(map(resultSet));
             }
-            
-            logDB.debug("--------------------------------------------------------------------------");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(connection, preparedStatement, resultSet);
+            //logDB.debug("stm, tbl : " + getTableName(ps.getSql()) + " : " +(int) ((System.currentTimeMillis() - startTime) / 1000) + " [s]");
+            //logDB.debug("--------------------------------------------------------------------------");
         }
         return cBest;
     }
@@ -285,16 +285,15 @@ public class DAOBase {
      */
     public Long executeSQLCountStatemet4PS(PreparedStatementO ps, DAOFactoryJDBC daoFactory) {
 
-        Long recordCount = 0L;
+    	//long startTime = 0;
+        long recordCount = 0;
         int dataRecordCounter = 0;
         ResultSet resultSet = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            logDB.debug("SQL: " + ps.getSql());
-            logDB.debug("VAL: " + ps.toString());
-            
+        	//startTime = System.currentTimeMillis();            
             connection = daoFactory.getConnection();
             preparedStatement = prepareStatement(connection, ps.getSql(), false, (Object[]) ps.getValues());
             resultSet = preparedStatement.executeQuery();
@@ -302,11 +301,11 @@ public class DAOBase {
                 recordCount = Long.valueOf(resultSet.getString(++dataRecordCounter));
             }
 
-            logDB.debug("--------------------------------------------------------------------------");
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
             close(connection, preparedStatement);
+            //logDB.debug("cnt, tbl : " + getTableName(ps.getSql()) + " : " +(int) ((System.currentTimeMillis() - startTime) / 1000) + " [s]");
         }
 
         return recordCount;
@@ -318,7 +317,7 @@ public class DAOBase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        log.debug(sql);
+        //log.debug(sql);
 
         try {
             connection = daoFactory.getConnection();
@@ -347,4 +346,48 @@ public class DAOBase {
         return DAOFactoryJDBC.getInstance(dbFileUserPerm).getDAOHistoryBr();
     }
 
+	private String getTableName(String sql) {
+
+		String tableName = null;
+
+		if (sql != null) {
+			sql = sql.toLowerCase();
+			int from = sql.indexOf("from ");
+			if (from >= 0) {
+				int start = from + 5;
+				int end = sql.indexOf(' ', start);
+
+				tableName = end >= 0 ? sql.substring(start, end) : sql.substring(start);
+			}
+		}
+
+		return tableName;
+	}
+	
+	public boolean indexExists(DAOFactoryJDBC daoFactory, String indexName) {
+
+		String sql = "SELECT 1 " + "FROM sqlite_master " + "WHERE type = 'index' " + "AND name = ? " + "LIMIT 1";
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, indexName);
+
+			resultSet = preparedStatement.executeQuery();
+			boolean indexExists = false;
+			if (resultSet.next()) {
+				indexExists = true;
+			}
+			return indexExists;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			close(connection, preparedStatement, resultSet);
+		}
+	}
 }

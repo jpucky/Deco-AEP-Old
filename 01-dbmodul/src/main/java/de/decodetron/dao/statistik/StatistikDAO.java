@@ -101,12 +101,13 @@ import de.decodetron.util.Util;
 public class StatistikDAO extends DAO implements StatistikDAOI {
 
     private DAOFactoryJDBC daoFactory;
-    private static Logger log = Logger.getLogger(DAO.class);
+    //private static Logger log = Logger.getLogger(DAO.class);
 
     public static final String COL_DOKUMENTTYP = "DokumentTyp";
     public static final String COL_POSITIONSTYP = "PositionsTyp";
     public static final String COL_CLUBKZ = "ClubKz";
-
+    private static Logger logDB = Logger.getLogger("LOGFILE");
+    
     public StatistikDAO(DAOFactoryJDBC df) {
         super(df);
         daoFactory = df;
@@ -185,8 +186,12 @@ public class StatistikDAO extends DAO implements StatistikDAOI {
         PreparedStatementO all = new PreparedStatementO();
         all.setSql(sb.toString().replaceFirst(" and", " where"));
         all.setValues(Util.concatAllArrays(ps1.getValues(), ps2.getValues()));
-
-        return executeSQLCountStatemet4PS(all, daoFactory);
+        
+        long startTime = System.currentTimeMillis();
+        Long value = executeSQLCountStatemet4PS(all, daoFactory);
+		logDB.debug("cnt, tbl : " + tableName + " : " + (int) ((System.currentTimeMillis() - startTime) / 1000)
+				+ " [s], filter: " + userFilter + " filter2: " + getStringArrayItems(filterValues));
+        return value;
     }
 
     @Override
@@ -222,7 +227,13 @@ public class StatistikDAO extends DAO implements StatistikDAOI {
         all.setSql(sb.toString().replaceFirst(" and", " where"));
         all.setValues(Util.concatAllArrays(ps1.getValues(), ps2.getValues()));
 
-        return (executeSQLStatement4PS(all, daoFactory));
+        long startTime = System.currentTimeMillis(); 
+        List<DataRecord> ldr = executeSQLStatement4PS(all, daoFactory);
+		logDB.debug("stm, tbl : " + tableName + " : " + (int) ((System.currentTimeMillis() - startTime) / 1000)
+				+ " [s], filter: " + userFilter + " filter2: " + getStringArrayItems(filterValues));
+        logDB.debug("--------------------------------------------------------------------------");
+        
+        return ldr;
     }
 
     /**

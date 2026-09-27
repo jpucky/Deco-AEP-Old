@@ -10,7 +10,7 @@
 //
 //
 
-package de.decodetron.dao.statistik.club;
+package de.decodetron.dao.statistik.clubabv;
 
 import de.decodetron.dao.statistik.StatistikDAOI;
 
@@ -19,6 +19,6 @@ import de.decodetron.dao.statistik.StatistikDAOI;
  * @since 20.07.2015
  * 
  */
-public interface DAOIClub extends StatistikDAOI {
+public interface DAOIClubAb extends StatistikDAOI {
 
 }

@@ -120,6 +120,7 @@ public class BtmDataProvider extends SortableDataProvider {
             //map.put(Const.KEYHITSPERPAGE, size());
             map.put(Const.KEYSHOWPERPAGE, count);
             map.put(Const.KEYDOCTOTAL, getContactsDB().countAllRecords(Const.TABLENAME_BTM));
+            // map.put(Const.KEYDOCTOTAL, map.get(Const.KEYHITSPERPAGE)); // Geht das oder stimmt das bei Filtern nicht mehr ?
             model.setObject(map);
         }
     }
