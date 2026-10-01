@@ -8,6 +8,7 @@ package de.decodetron.tab.statistik;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.link.DownloadLink;
@@ -18,6 +19,7 @@ import org.apache.wicket.util.value.ValueMap;
 
 import de.decodetron.Const;
 import de.decodetron.bo.DataRecord;
+import de.decodetron.bo.FilterItemList;
 import de.decodetron.bo.Section;
 import de.decodetron.data.Util;
 import de.decodetron.security.LoginSession;
@@ -37,10 +39,12 @@ public class TransfusionPdfLink extends DownloadLink {
             @Override
             public File getObject() {
                 Section sec = LoginSession.get().getCurrentSection();
-                ValueMap map = (ValueMap) mm.getObject();
-                TransfusionFilterAttr tf = (TransfusionFilterAttr) map.get(Const.KEY_BTN_FILTERSUCHE);
+                ValueMap map = (ValueMap) mm.getObject();                
+                List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
+                FilterItemList fList = Util.mapSearchFields(listTxtFields);
+                
                 Util util = new Util();
-                File file = util.createEmptyTransfusionPDF(tf, tblHeader, sec, xslTemplate);
+                File file = util.createEmptyTransfusionPDF(fList, tblHeader, sec, xslTemplate);
                 return file;
             }
         });

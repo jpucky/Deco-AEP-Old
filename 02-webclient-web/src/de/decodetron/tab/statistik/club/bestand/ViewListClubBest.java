@@ -81,6 +81,7 @@ package de.decodetron.tab.statistik.club.bestand;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.util.value.ValueMap;
 
 import de.decodetron.AEPApplication;
 import de.decodetron.AEPClassLoader;
@@ -101,7 +102,7 @@ import de.decodetron.tab.statistik.TrefferLabel;
  */
 public class ViewListClubBest extends StatistikListPanel {
 
-    public ViewListClubBest(String id, IModel<?> model) {
+    public ViewListClubBest(String id, IModel<ValueMap> model) {
         super(id, model);
         setOutputMarkupId(true);
 

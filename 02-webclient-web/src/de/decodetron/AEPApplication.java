@@ -3,6 +3,8 @@ package de.decodetron;
 import java.io.File;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,6 +14,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +57,6 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.request.resource.UrlResourceReference;
 import org.apache.wicket.resource.JQueryPluginResourceReference;
 import org.apache.wicket.util.resource.FileResourceStream;
-import org.apache.wicket.util.time.Duration;
 
 import de.decodetron.bo.User;
 import de.decodetron.dao.halde.HaldeDAOI;
@@ -85,6 +89,7 @@ public class AEPApplication extends WebApplication {
 
     protected URIResolver uriResolver;
     private AEPApplicationModel model;
+    // private GenericCountCache countCache;
     private static final Integer LUECKEN_GEN_HH = 1; // Nachts um 1:00
     private static final Integer DELETE_PDF_HH = 3; // Nachts um 3:00
     private static Logger log = Logger.getLogger(AEPApplication.class);
@@ -140,25 +145,10 @@ public class AEPApplication extends WebApplication {
     public static String SCRIPT_ROOT_PATH = "../..";
     
     public static void initDatePicker(IHeaderResponse response) {
-//        response.render(JavaScriptHeaderItem.forReference(new JQueryPluginResourceReference(AEPApplication.class,
-//            SCRIPT_ROOT_PATH + "ui/jquery.ui.core.js")));
-//        response.render(JavaScriptHeaderItem.forReference(new JQueryPluginResourceReference(AEPApplication.class,
-//                SCRIPT_ROOT_PATH + "ui/jquery.ui.widget.js")));
-//        response.render(JavaScriptHeaderItem.forReference(new JQueryPluginResourceReference(AEPApplication.class,
-//                SCRIPT_ROOT_PATH + "ui/jquery.ui.datepicker.js")));
-//        response.render(JavaScriptHeaderItem.forReference(new JQueryPluginResourceReference(AEPApplication.class,
-//                SCRIPT_ROOT_PATH + "ui/i18n/jquery.ui.datepicker-de.js")));
-//        response.render(CssHeaderItem.forReference(new CssResourceReference(AEPApplication.class,
-//                SCRIPT_ROOT_PATH + "themes/base/jquery.ui.all.css")));
-//        response.render(CssHeaderItem.forReference(new CssResourceReference(AEPApplication.class,
-//                SCRIPT_ROOT_PATH + "demos/demos.css")));
         response.render(OnDomReadyHeaderItem.forScript("$.fn.initDateSearchRecherche()"));
         response.render(OnDomReadyHeaderItem.forScript("$.fn.initDateSearchStatistik()"));
     }
 
-    private void startFilePoller() {
-
-    }
 
     /**
      * @see org.apache.wicket.Application#init()
@@ -166,8 +156,6 @@ public class AEPApplication extends WebApplication {
     @Override
     public void init() {
         super.init();
-
-        startFilePoller();
 
         // getJavaScriptLibrarySettings().setJQueryReference(yourJquery183ResourceReference);
         this.getMarkupSettings().setStripWicketTags(true);
@@ -279,10 +267,106 @@ public class AEPApplication extends WebApplication {
         log.info("# Lucy-Verzeichnis    : " + getModel().getPathLucy());
         log.info("####################################################");
 
-        initLueckenPolling();
+        // initLueckenPolling();
         initPDFDiretoryCleaner();
+        
+//        log.info("CHARGEN: " + getDBChargenFilter().countAllRecords(Const.TABLENAME_CHARGEN));
+//        log.info("BESTAND: " + getDBClubBestand().countAllRecords(Const.TABLENAME_BESTAND));
+//        log.info("DEFEKTE: " + getDBDefekteFilter().countAllRecords(Const.TABLENAME_DEFEKTE));
+		//startNightlyScheduler();
+		//this.countCache = new GenericCountCache(24, TimeUnit.HOURS);
+		//countBestand();
+        //countChargen();
+        //countDefekte();
     }
 
+//    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+//
+//    public void startNightlyScheduler() {
+//        ZonedDateTime now = ZonedDateTime.now();
+//        ZonedDateTime nextRun = now.withHour(3).withMinute(0).withSecond(0).withNano(0);
+//
+//        // Falls es heute bereits nach 03:00 Uhr ist, für morgen 03:00 Uhr einplanen
+//        if (now.compareTo(nextRun) >= 0) {
+//            nextRun = nextRun.plusDays(1);
+//        }
+//
+//        long initialDelay = Duration.between(now, nextRun).getSeconds();
+//        long period = TimeUnit.DAYS.toSeconds(1);
+//
+//        scheduler.scheduleAtFixedRate(this::executeDatabaseJobs, initialDelay, period, TimeUnit.SECONDS);
+//    }
+//    
+//    private void executeDatabaseJobs() {
+//        try {
+//            System.out.println("Starte nächtliche Datenbank-Aktionen um 03:00 Uhr...");
+//            
+//            countBestand();
+//            countChargen();
+//            countDefekte();
+//
+//            System.out.println("DB-Aktionen erfolgreich abgeschlossen.");
+//        } catch (Exception e) {
+//            // Unbedingt abfangen, damit unvorhergesehene Fehler den Scheduler für Folgetage nicht abstürzen lassen
+//            System.err.println("Fehler bei der Ausführung der DB-Jobs: " + e.getMessage());
+//        }
+//    }
+//
+//    private void countBestand() {
+//        Executors.newSingleThreadExecutor().submit(() -> {
+//            try {
+//                getCachedTotalRecordCount(Const.TABLENAME_BESTAND, 
+//                    () -> getDBClubBestand().countAllRecords(Const.TABLENAME_BESTAND));
+//            } catch (Exception e) {
+//            	log.error("Fehler beim Vorwärmen des Bestand-Caches", e);
+//            }
+//        });
+//    }
+//    
+//    private void countChargen() {
+//    	log.info("CHARGEN: " + getDBChargenFilter().countAllRecords(Const.TABLENAME_CHARGEN));
+//        Executors.newSingleThreadExecutor().submit(() -> {
+//            try {
+//                getCachedTotalRecordCount(Const.TABLENAME_CHARGEN, 
+//                    () -> getDBChargenFilter().countAllRecords(Const.TABLENAME_CHARGEN));
+//            } catch (Exception e) {
+//            	log.error("Fehler beim Vorwärmen des Chargen-Caches", e);
+//            }
+//        });
+//    }
+//    
+//    private void countDefekte() {
+//        Executors.newSingleThreadExecutor().submit(() -> {
+//            try {
+//                getCachedTotalRecordCount(Const.TABLENAME_DEFEKTE, 
+//                    () -> getDBDefekteFilter().countAllRecords(Const.TABLENAME_DEFEKTE));
+//            } catch (Exception e) {
+//            	log.error("Fehler beim Vorwärmen des Defekte-Caches", e);
+//            }
+//        });
+//    }
+//    
+//    /**
+//     * Generische Methode für alle kritischen Tabellen / DBs
+//     */
+//    public long getCachedTotalRecordCount(String tableName, GenericCountCache.CountSupplier supplier) {
+//        return countCache.getCount(tableName, supplier);
+//    }
+//    
+//    public void invalidateCountCache(String tableName) {
+//        if (countCache != null) {
+//            countCache.invalidate(tableName);
+//        }
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        if (countCache != null) {
+//            countCache.shutdown(); // ThreadPool sauber herunterfahren
+//        }
+//        super.onDestroy();
+//    }
+    
     private static class FolderContentResource implements IResource {
         private final File rootFolder;
 
@@ -475,71 +559,6 @@ public class AEPApplication extends WebApplication {
                     pdfFile.delete();
                 }
             }
-            super.onEndRequest(cycle);
-        }
-    }
-
-    private class SessionGuard extends AbstractRequestCycleListener {
-
-        @Override
-        public void onBeginRequest(RequestCycle cycle) {
-
-            // getRequestCycleSettings().setRenderStrategy(
-            // IRequestCycleSettings.RenderStrategy.ONE_PASS_RENDER);
-
-            Duration timout = getRequestCycleSettings().getTimeout();
-            WebRequest req = (WebRequest) RequestCycle.get().getRequest();
-            HttpServletRequest httpReq = (HttpServletRequest) req.getContainerRequest();
-            int maxInteractiveInterval = httpReq.getSession().getMaxInactiveInterval();
-            String isSecure = httpReq.isSecure() ? "https://" : "http://";
-
-            System.out.println("1: " + isSecure + RequestCycle.get().getUrlRenderer().getBaseUrl().getHost() + ":"
-                    + RequestCycle.get().getUrlRenderer().getBaseUrl().getPort());
-            System.out.println("2: " + RequestUtils.toAbsolutePath(httpReq.getRequestURL().toString(), "/"));
-            System.out.println("3: " + WebApplication.get().getServletContext().getServerInfo());
-            System.out.println("4: " + WebApplication.get().getServletContext().getRealPath(""));
-            System.out.println("5: " + getFrameworkSettings().getVersion());
-
-            List<?> p = RequestCycle.get().getUrlRenderer().getBaseUrl().getQueryParameters();
-            if (p != null && p.size() > 0) {
-                QueryParameter qp = (QueryParameter) p.get(0);
-                System.out.println("6: " + qp);
-            }
-
-            try {
-                System.out.println("7: " + WebApplication.get().getServletContext().getResource("/"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            WebApplication web = WebApplication.get();
-            ServletContext ctx = web.getServletContext();
-            LoginSession session = LoginSession.class.cast(Session.get());
-
-            if (session.isSignedIn()) {
-
-                // sessionMap.put(session.getUser().getLogin(), session);
-                System.out.println("Username     : " + session.getUser().getNachname());
-                System.out.println("Session-ID   : " + session.getId());
-                System.out.println("Remote-adr   : " + httpReq.getRemoteHost() + "\n");
-                System.out.println("MaxInactiveInterval : " + maxInteractiveInterval + " [s]");
-                System.out.println("Zeit bis zum Timeout? : " + timout.getMilliseconds() / 1000 + " [s]");
-                System.out.println("ServletContext : " + ctx.getContextPath());
-                System.out.println(" ");
-            } else {
-                System.out.println("An diesem Client: " + httpReq.getRemoteHost() + " keiner eingeloggt.");
-            }
-
-            super.onBeginRequest(cycle);
-        }
-
-        @Override
-        public void onRequestHandlerExecuted(RequestCycle cycle, IRequestHandler handler) {
-            super.onRequestHandlerExecuted(cycle, handler);
-        }
-
-        @Override
-        public void onEndRequest(RequestCycle cycle) {
             super.onEndRequest(cycle);
         }
     }

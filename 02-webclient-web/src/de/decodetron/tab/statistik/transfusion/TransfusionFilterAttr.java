@@ -19,253 +19,247 @@ import java.io.Serializable;
  * @since 28.11.2013
  * @deprecated
  */
-public class TransfusionFilterAttr implements Serializable{
-    
-    private String auftragDatumVon = "";
-    private String auftragDatumBis = "";
-    String kundenNr = "";
-    String auftragsNr = "";
-    String lieferscheinNr = "";
-    
-    String picklistenNr = "";
-    String pzn = "";
-    String artikelbezeichnung = "";
-    String menge = "";
-    
-    String preis = "";
-    String betrag = "";
-    String lieferantNr = "";
-    String lieferantName = "";
-    
-    String chargennummer = "";
+public class TransfusionFilterAttr implements Serializable {
 
-    /**
-     * @return the auftragDatumVon
-     */
-    public String getAuftragDatumVon() {
-        return auftragDatumVon == null ? "" : auftragDatumVon;
-    }
+	public String auftragDatumVon = "";
+	public String auftragDatumBis = "";
+	public String kundenNr = "";
+	public String auftragsNr = "";
+	public String lieferscheinNr = "";
 
-    /**
-     * @param auftragDatumVon the auftragDatumVon to set
-     */
-    public void setAuftragDatumVon(String auftragDatumVon) {
-        this.auftragDatumVon = auftragDatumVon;
-    }
+	public String picklistenNr = "";
+	public String pzn = "";
+	public String artikelbezeichnung = "";
+	public String menge = "";
 
-    /**
-     * @return the auftragDatumBis
-     */
-    public String getAuftragDatumBis() {
-        return auftragDatumBis == null ? "" : auftragDatumBis;
-    }
+	public String preis = "";
+	public String betrag = "";
+	public String lieferantNr = "";
+	public String lieferantName = "";
 
-    /**
-     * @param auftragDatumBis the auftragDatumBis to set
-     */
-    public void setAuftragDatumBis(String auftragDatumBis) {
-        this.auftragDatumBis = auftragDatumBis;
-    }
-    /**
-     * @return the kundenNr
-     */
-    public String getKundenNr() {
-        return kundenNr == null ? "" : kundenNr;
-    }
+	public String chargennummer = "";
 
-    /**
-     * @param kundenNr
-     *            the kundenNr to set
-     */
-    public void setKundenNr(String kundenNr) {
-        this.kundenNr = kundenNr;
-    }
+	/**
+	 * @return the auftragDatumVon
+	 */
+	public String getAuftragDatumVon() {
+		return auftragDatumVon == null ? "" : auftragDatumVon;
+	}
 
-    /**
-     * @return the auftragsNr
-     */
-    public String getAuftragsNr() {
-        return auftragsNr == null ? "" : auftragsNr;
-    }
+	/**
+	 * @param auftragDatumVon
+	 *            the auftragDatumVon to set
+	 */
+	public void setAuftragDatumVon(String auftragDatumVon) {
+		this.auftragDatumVon = auftragDatumVon;
+	}
 
-    /**
-     * @param auftragsNr
-     *            the auftragsNr to set
-     */
-    public void setAuftragsNr(String auftragsNr) {
-        this.auftragsNr = auftragsNr;
-    }
+	/**
+	 * @return the auftragDatumBis
+	 */
+	public String getAuftragDatumBis() {
+		return auftragDatumBis == null ? "" : auftragDatumBis;
+	}
 
-    /**
-     * @return the lieferscheinNr
-     */
-    public String getLieferscheinNr() {
-        return lieferscheinNr == null ? "" : lieferscheinNr;
-    }
+	/**
+	 * @param auftragDatumBis
+	 *            the auftragDatumBis to set
+	 */
+	public void setAuftragDatumBis(String auftragDatumBis) {
+		this.auftragDatumBis = auftragDatumBis;
+	}
 
-    /**
-     * @param lieferscheinNr
-     *            the lieferscheinNr to set
-     */
-    public void setLieferscheinNr(String lieferscheinNr) {
-        this.lieferscheinNr = lieferscheinNr;
-    }
+	/**
+	 * @return the kundenNr
+	 */
+	public String getKundenNr() {
+		return kundenNr == null ? "" : kundenNr;
+	}
 
-    /**
-     * @return the picklistenNr
-     */
-    public String getPicklistenNr() {
-        return picklistenNr == null ? "" : picklistenNr;
-    }
+	/**
+	 * @param kundenNr
+	 *            the kundenNr to set
+	 */
+	public void setKundenNr(String kundenNr) {
+		this.kundenNr = kundenNr;
+	}
 
-    /**
-     * @param picklistenNr
-     *            the picklistenNr to set
-     */
-    public void setPicklistenNr(String picklistenNr) {
-        this.picklistenNr = picklistenNr;
-    }
+	/**
+	 * @return the auftragsNr
+	 */
+	public String getAuftragsNr() {
+		return auftragsNr == null ? "" : auftragsNr;
+	}
 
-    /**
-     * @return the pzn
-     */
-    public String getPzn() {
-        return pzn == null ? "" : pzn;
-    }
+	/**
+	 * @param auftragsNr
+	 *            the auftragsNr to set
+	 */
+	public void setAuftragsNr(String auftragsNr) {
+		this.auftragsNr = auftragsNr;
+	}
 
-    /**
-     * @param pzn
-     *            the pzn to set
-     */
-    public void setPzn(String pzn) {
-        this.pzn = pzn;
-    }
+	/**
+	 * @return the lieferscheinNr
+	 */
+	public String getLieferscheinNr() {
+		return lieferscheinNr == null ? "" : lieferscheinNr;
+	}
 
-    /**
-     * @return the artikelbezeichnung
-     */
-    public String getArtikelbezeichnung() {
-        return artikelbezeichnung == null ? "" : artikelbezeichnung;
-    }
+	/**
+	 * @param lieferscheinNr
+	 *            the lieferscheinNr to set
+	 */
+	public void setLieferscheinNr(String lieferscheinNr) {
+		this.lieferscheinNr = lieferscheinNr;
+	}
 
-    /**
-     * @param artikelbezeichnung
-     *            the artikelbezeichnung to set
-     */
-    public void setArtikelbezeichnung(String artikelbezeichnung) {
-        this.artikelbezeichnung = artikelbezeichnung;
-    }
+	/**
+	 * @return the picklistenNr
+	 */
+	public String getPicklistenNr() {
+		return picklistenNr == null ? "" : picklistenNr;
+	}
 
-    /**
-     * @return the menge
-     */
-    public String getMenge() {
-        return menge == null ? "" : menge;
-    }
+	/**
+	 * @param picklistenNr
+	 *            the picklistenNr to set
+	 */
+	public void setPicklistenNr(String picklistenNr) {
+		this.picklistenNr = picklistenNr;
+	}
 
-    /**
-     * @param menge
-     *            the menge to set
-     */
-    public void setMenge(String menge) {
-        this.menge = menge;
-    }
+	/**
+	 * @return the pzn
+	 */
+	public String getPzn() {
+		return pzn == null ? "" : pzn;
+	}
 
-    /**
-     * @return the preis
-     */
-    public String getPreis() {
-        return preis == null ? "" : preis;
-    }
+	/**
+	 * @param pzn
+	 *            the pzn to set
+	 */
+	public void setPzn(String pzn) {
+		this.pzn = pzn;
+	}
 
-    /**
-     * @param preis
-     *            the preis to set
-     */
-    public void setPreis(String preis) {
-        this.preis = preis;
-    }
+	/**
+	 * @return the artikelbezeichnung
+	 */
+	public String getArtikelbezeichnung() {
+		return artikelbezeichnung == null ? "" : artikelbezeichnung;
+	}
 
-    /**
-     * @return the betrag
-     */
-    public String getBetrag() {
-        return betrag == null ? "" : betrag;
-    }
+	/**
+	 * @param artikelbezeichnung
+	 *            the artikelbezeichnung to set
+	 */
+	public void setArtikelbezeichnung(String artikelbezeichnung) {
+		this.artikelbezeichnung = artikelbezeichnung;
+	}
 
-    /**
-     * @param betrag
-     *            the betrag to set
-     */
-    public void setBetrag(String betrag) {
-        this.betrag = betrag;
-    }
+	/**
+	 * @return the menge
+	 */
+	public String getMenge() {
+		return menge == null ? "" : menge;
+	}
 
-    /**
-     * @return the lieferantNr
-     */
-    public String getLieferantNr() {
-        return lieferantNr == null ? "" : lieferantNr;
-    }
+	/**
+	 * @param menge
+	 *            the menge to set
+	 */
+	public void setMenge(String menge) {
+		this.menge = menge;
+	}
 
-    /**
-     * @param lieferantNr
-     *            the lieferantNr to set
-     */
-    public void setLieferantNr(String lieferantNr) {
-        this.lieferantNr = lieferantNr;
-    }
+	/**
+	 * @return the preis
+	 */
+	public String getPreis() {
+		return preis == null ? "" : preis;
+	}
 
-    /**
-     * @return the lieferantName
-     */
-    public String getLieferantName() {
-        return lieferantName == null ? "" : lieferantName;
-    }
+	/**
+	 * @param preis
+	 *            the preis to set
+	 */
+	public void setPreis(String preis) {
+		this.preis = preis;
+	}
 
-    /**
-     * @param lieferantName
-     *            the lieferantName to set
-     */
-    public void setLieferantName(String lieferantName) {
-        this.lieferantName = lieferantName;
-    }
+	/**
+	 * @return the betrag
+	 */
+	public String getBetrag() {
+		return betrag == null ? "" : betrag;
+	}
 
-    /**
-     * @return the chargennummer
-     */
-    public String getChargennummer() {
-        return chargennummer == null ? "" : chargennummer;
-    }
+	/**
+	 * @param betrag
+	 *            the betrag to set
+	 */
+	public void setBetrag(String betrag) {
+		this.betrag = betrag;
+	}
 
-    /**
-     * @param chargennummer
-     *            the chargennummer to set
-     */
-    public void setChargennummer(String chargennummer) {
-        this.chargennummer = chargennummer;
-    }
-    
-    public boolean fieldsEmpty() {
-        return
+	/**
+	 * @return the lieferantNr
+	 */
+	public String getLieferantNr() {
+		return lieferantNr == null ? "" : lieferantNr;
+	}
 
-        getAuftragDatumVon().isEmpty()
-        && getAuftragDatumBis().isEmpty()
-        && getKundenNr().isEmpty()
+	/**
+	 * @param lieferantNr
+	 *            the lieferantNr to set
+	 */
+	public void setLieferantNr(String lieferantNr) {
+		this.lieferantNr = lieferantNr;
+	}
 
-        && getAuftragsNr().isEmpty()
-        && getLieferscheinNr().isEmpty()     
-        && getPicklistenNr().isEmpty()
-        && getPzn().isEmpty()
+	/**
+	 * @return the lieferantName
+	 */
+	public String getLieferantName() {
+		return lieferantName == null ? "" : lieferantName;
+	}
 
-        && getArtikelbezeichnung().isEmpty()
-        && getMenge().isEmpty()
-        && getPreis().isEmpty()
-        && getBetrag().isEmpty()
+	/**
+	 * @param lieferantName
+	 *            the lieferantName to set
+	 */
+	public void setLieferantName(String lieferantName) {
+		this.lieferantName = lieferantName;
+	}
 
-        && getLieferantNr().isEmpty()
-        && getLieferantName().isEmpty()
-        && getChargennummer().isEmpty()
-        ;
-    }
+	/**
+	 * @return the chargennummer
+	 */
+	public String getChargennummer() {
+		return chargennummer == null ? "" : chargennummer;
+	}
+
+	/**
+	 * @param chargennummer
+	 *            the chargennummer to set
+	 */
+	public void setChargennummer(String chargennummer) {
+		this.chargennummer = chargennummer;
+	}
+
+	public boolean fieldsEmpty() {
+		return
+
+		getAuftragDatumVon().isEmpty() && getAuftragDatumBis().isEmpty() && getKundenNr().isEmpty()
+
+				&& getAuftragsNr().isEmpty() && getLieferscheinNr().isEmpty() && getPicklistenNr().isEmpty()
+				&& getPzn().isEmpty()
+
+				&& getArtikelbezeichnung().isEmpty() && getMenge().isEmpty() && getPreis().isEmpty()
+				&& getBetrag().isEmpty()
+
+				&& getLieferantNr().isEmpty() && getLieferantName().isEmpty() && getChargennummer().isEmpty();
+	}
 }

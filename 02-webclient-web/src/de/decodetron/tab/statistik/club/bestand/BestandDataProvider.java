@@ -70,93 +70,100 @@ import de.decodetron.tab.statistik.TxtFilter;
  */
 public class BestandDataProvider extends SortableDataProvider {
 
-    private IModel<ValueMap> model;
+	private IModel<ValueMap> model;
 
-    public BestandDataProvider(IModel m) {
-        model = m;
-        setSort("1", SortOrder.DESCENDING);
-    }
+	public BestandDataProvider(IModel m) {
+		model = m;
+		setSort("1", SortOrder.DESCENDING);
+	}
 
-    protected DAOIClubBes getContactsDB() {
-        return AEPApplication.get().getDBClubBestand();
-    }
+	protected DAOIClubBes getContactsDB() {
+		return AEPApplication.get().getDBClubBestand();
+	}
 
-    @Override
-    public Iterator<DataRecord> iterator(long first, long count) {
-        final SortParam<String> sort = getSort();
-        refreshSortInfo(sort.isAscending(), sort.getProperty(), first, count);
-        ValueMap map = (ValueMap) model.getObject();
-        List<DataRecord> list = initClubBestandListe(map);
-        return list.iterator();
-    }
+	@Override
+	public Iterator<DataRecord> iterator(long first, long count) {
+		final SortParam<String> sort = getSort();
+		refreshSortInfo(sort.isAscending(), sort.getProperty(), first, count);
+		ValueMap map = (ValueMap) model.getObject();
+		List<DataRecord> list = initClubBestandListe(map);
+		return list.iterator();
+	}
 
-    /**
-     * Setzt die Sortierinformationen Systemweit u.a für Suche-Starten.
-     * 
-     * @param Boolean
-     *            isAscending
-     * @param String
-     *            colIndex
-     * @param long first
-     */
-    private void refreshSortInfo(Boolean isAscending, String colIndex, long first, long count) {
-        if (model != null) {
-            ValueMap map = (ValueMap) model.getObject();
-            map.put(Const.KEY_LIST_ISASCENDING, isAscending);
-            map.put(Const.KEY_LIST_COLNR2SORT, Integer.valueOf(colIndex));
-            map.put(Const.KEY_LIST_OFFSET, first);
-            map.put(Const.KEYSHOWPERPAGE, count);
-            map.put(Const.KEYDOCTOTAL, getContactsDB().countAllRecords(Const.TABLENAME_BESTAND));
-            model.setObject(map);
-        }
-    }
+//	public long getTotalCount() {
+//        // Aufruf über die AEPApplication – generisch für jede beliebige DB/Tabelle
+//        return AEPApplication.get().getCachedTotalRecordCount(
+//            Const.TABLENAME_BESTAND,  () -> getContactsDB().countAllRecords(Const.TABLENAME_BESTAND)
+//        );
+//    }
+	
+	/**
+	 * Setzt die Sortierinformationen Systemweit u.a für Suche-Starten.
+	 * 
+	 * @param Boolean
+	 *            isAscending
+	 * @param String
+	 *            colIndex
+	 * @param long
+	 *            first
+	 */
+	private void refreshSortInfo(Boolean isAscending, String colIndex, long first, long count) {
+		if (model != null) {
+			ValueMap map = (ValueMap) model.getObject();
+			map.put(Const.KEY_LIST_ISASCENDING, isAscending);
+			map.put(Const.KEY_LIST_COLNR2SORT, Integer.valueOf(colIndex));
+			map.put(Const.KEY_LIST_OFFSET, first);
+			map.put(Const.KEYSHOWPERPAGE, count);
+			map.put(Const.KEYDOCTOTAL, getContactsDB().countAllRecords(Const.TABLENAME_BESTAND));
+			// map.put(Const.KEYDOCTOTAL, getTotalCount());
+			model.setObject(map);
+		}
+	}
 
-    @Override
-    public long size() {
+	@Override
+	public long size() {
+		ValueMap map = (ValueMap) model.getObject();
+		List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
+		FilterItemList fList = Util.mapSearchFields(listTxtFields);
 
-        ValueMap map = (ValueMap) model.getObject();
-        List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
-        FilterItemList fList = Util.mapSearchFields(listTxtFields);
+		String colName = LoginSession.get().getCurrentSection().getFilteridentifier();
+		List<String> filterList = LoginSession.get().getUser().getAllFilter();
 
-        String colName = LoginSession.get().getCurrentSection().getFilteridentifier();
-        List<String> filterList = LoginSession.get().getUser().getAllFilter();
+		Long cnt = getContactsDB().countClubBestandData(Const.TABLENAME_BESTAND, colName, filterList, fList);
+		// Ist nötig wenn cnt == 0, da der Iterator nicht aktualisiert!
+		map.put(Const.KEYHITSPERPAGE, cnt);
+		map.put(Const.KEYSHOWPERPAGE, cnt);
+		return cnt;
+	}
 
-        Long cnt = 0L;
-        cnt = getContactsDB().countClubBestandData(Const.TABLENAME_BESTAND, colName, filterList, fList);
-        // Ist nötig wenn cnt == 0, da der Iterator nicht aktualisiert!
-        map.put(Const.KEYHITSPERPAGE, cnt);
-        map.put(Const.KEYSHOWPERPAGE, cnt);
-        return cnt;
-    }
+	private List<DataRecord> initClubBestandListe(ValueMap map) {
 
-    private List<DataRecord> initClubBestandListe(ValueMap map) {
+		String colName = LoginSession.get().getCurrentSection().getFilteridentifier();
+		List<String> filterList = LoginSession.get().getUser().getAllFilter();
+		Integer sortColNr = (Integer) map.get(Const.KEY_LIST_COLNR2SORT);
+		String sortOrder = (Boolean) map.get(Const.KEY_LIST_ISASCENDING) ? "asc" : "desc";
+		Long sortOffset = (Long) map.get(Const.KEY_LIST_OFFSET);
+		SortInfo sortInfo = new SortInfo(sortOrder, sortColNr);
+		LimitInfo limitInfo = new LimitInfo(Const.ITEMS_PER_PAGE, sortOffset);
 
-        String colName = LoginSession.get().getCurrentSection().getFilteridentifier();
-        List<String> filterList = LoginSession.get().getUser().getAllFilter();
-        Integer sortColNr = (Integer) map.get(Const.KEY_LIST_COLNR2SORT);
-        String sortOrder = (Boolean) map.get(Const.KEY_LIST_ISASCENDING) ? "asc" : "desc";
-        Long sortOffset = (Long) map.get(Const.KEY_LIST_OFFSET);
-        SortInfo sortInfo = new SortInfo(sortOrder, sortColNr);
-        LimitInfo limitInfo = new LimitInfo(Const.ITEMS_PER_PAGE, sortOffset);
+		List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
+		FilterItemList fList = Util.mapSearchFields(listTxtFields);
 
-        List<TxtFilter> listTxtFields = (List<TxtFilter>) map.get(Const.KEY_LIST_FILTERSUCHE);
-        FilterItemList fList = Util.mapSearchFields(listTxtFields);
+		List<DataRecord> list = getContactsDB().getClubBestandData(//
+				Const.TABLENAME_BESTAND, //
+				colName, //
+				filterList, //
+				sortInfo, //
+				limitInfo, fList//
+		);
 
-        List<DataRecord> list = getContactsDB().getClubBestandData(//
-            Const.TABLENAME_BESTAND,//
-            colName,//
-            filterList,//
-            sortInfo,//
-            limitInfo, fList//
-                );
+		return list;
+	}
 
-        return list;
-    }
-
-    @Override
-    @SuppressWarnings({ "unchecked" })
-    public IModel<Serializable> model(Object object) {
-        return new Model<Serializable>((Serializable) object);
-    }
+	@Override
+	@SuppressWarnings({ "unchecked" })
+	public IModel<Serializable> model(Object object) {
+		return new Model<Serializable>((Serializable) object);
+	}
 
 }
